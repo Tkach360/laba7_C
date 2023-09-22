@@ -83,61 +83,7 @@ string InputClientPhoneNumber(string message) {
 	return PhoneNumber;
 }
 
-//---------------------------------------Account-----------------------------------------
-
-Account InitAccount(double money) {
-	Account newAccount;
-	newAccount.money = money;
-	return newAccount;
-}
-
-void NewAccount(Client* client, double money) {
-	Account newAccount = InitAccount(money);
-	newAccount.id = client->Accounts.size();
-
-	newAccount.ClientName = client->Name; //
-
-	client->Accounts.push_back(newAccount);
-}
-
-int GetAccountId(Account account) { return account.id; }
-double GetMoney(Account account) { return account.money; }
-
-//---------------------------------------InputNewAccountFromConsole-----------------------------------
-
-void InputNewAccountFromConsole(Client* client) {
-	double money = InputDouble("Enter the initial amount in the account: ");
-	NewAccount(client, money);
-
-	cout << "Account created successfully" << endl;
-}
-
-//-------------------------------------Get-functions-Credit-and-Deposit--------------------------
-
-int GetYear(Credit credit) { return credit.year; }
-int GetYear(Deposit deposit) { return deposit.year; }
-
-double GetBody(Credit credit) { return credit.body; }
-double GetBody(Deposit deposit) { return deposit.body; }
-
-double GetPercent(Credit credit) { return credit.percent; }
-double GetPercent(Deposit deposit) { return deposit.percent; }
-
 //-------------------------------------Credit-----------------------------------------------------
-
-Credit InitCredit(int year, double body, double percent, double contribution) {
-	Credit newCredit;
-	newCredit.year = year;
-	newCredit.body = body;
-	newCredit.percent = percent;
-	newCredit.contribution = contribution;
-	return newCredit;
-}
-
-void NewCredit(Client* client, int year, double body, double percent, double contribution) {
-	Credit newCredit = InitCredit(year, body, percent, contribution);
-	client->Credits.push_back(newCredit);
-}
 
 double GetContribution(Credit credit) { return credit.contribution; }
 double GetFinalContributionsPayments(Credit credit) {
@@ -160,61 +106,6 @@ double GetFinalContributionsPayments(Credit credit) {
 	return FinalContributionsPayments;
 }
 
-//--------------------------------------InputNewCreditFromConsole-------------------------------------
-
-void InputNewCreditFromConsole(Client* client) {
-	int year = InputInt("Enter the number of years for which you want to take out a loan: ");
-	double body = InputDouble("Enter the loan amount: ");
-	double percent;
-	do {
-		percent = InputDouble("Enter the loan interest (1.XX..): ");
-		if (percent < 1) cout << "percentage cannot be less than 1" << endl;
-	} while (percent < 1);
-	double contribution = InputDouble("Enter the monthly payment amount: ");
-	NewCredit(client, year, body, percent, contribution);
-
-	cout << "Loan taken successfully" << endl;
-}
-
-//----------------------------------NewDeposit-----------------------------------------------------
-
-Deposit InitDeposit(int year, double body, double percent) {
-	Deposit newDeposit;
-	newDeposit.year = year;
-	newDeposit.body = body;
-	newDeposit.percent = percent;
-	return newDeposit;
-}
-
-void NewDeposit(Client* client, int year, double body, double percent) {
-	Deposit newDeposit = InitDeposit(year, body, percent);
-	client->Deposits.push_back(newDeposit);
-}
-double GetFinalDepositAmount(Deposit deposit) {
-	int years = GetYear(deposit);
-	double body = GetBody(deposit);
-	double percent = GetPercent(deposit);
-
-	for (int i = 0; i < years; i++) {
-		body *= percent;
-	}
-	return body;
-}
-
-//----------------------------------------InputNewDepositFromConsole------------------------------------
-
-void InputNewDepositFromConsole(Client* client) {
-	int year = InputInt("Enter the number of years for which you want to open a deposit: ");
-	double body = InputDouble("Enter the deposit amount: ");
-	double percent;
-	do {
-		percent = InputDouble("Enter the interest accrued per year on the deposit (1.XX..): ");
-		if (percent < 1) cout << "percentage cannot be less than 1" << endl;
-	} while (percent < 1);
-	NewDeposit(client, year, body, percent);
-
-	cout << "Money has been successfully deposited" << endl;
-}
 
 //------------------------------------------NewTransaction--------------------------------------------
 
