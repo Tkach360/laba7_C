@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include "Client.cpp"
 
 using namespace std;
 
@@ -67,19 +68,34 @@ private:
 	vector<Account> Accounts;
 
 public:
+	Client();
 	Client(string name, int age, string PhoneNumber) {
 		Name = name;
 		Age = age;
 		PhoneNumber = PhoneNumber;
 	}
+
+	string GetName() {
+		return Name;
+	}
+	string GetPhoneNumber() {
+		return PhoneNumber;
+	}
+	int GetAge() {
+		return Age;
+	}
+
+	void InputClientFromConsole() {
+		string Name, PhoneNumber;
+		int Age;
+		Name = InputClientName("Enter the name of the new client (First Name Last Name): ");
+		Age = InputInt("Enter the age of the new client: ");
+		PhoneNumber = InputClientPhoneNumber("Enter the phone number of the new client (X-XXX-XXX-XX-XX): ");
+
+		cout << "Client successfully registered" << endl;
+		Client(Name, Age, PhoneNumber);
+	}
 };
-
-//--------------------------Client-----------------------------------------------
-
-Client InitClientFromConsole();
-string GetName(Client client);
-string GetPhoneNumber(Client client);
-int GetAge(Client client);
 
 //---------------------------------------Account--------------------------------------
 

@@ -41,12 +41,6 @@ double InputDouble(string message) {
 
 //------------------------------------------------Client------------------------------------------
 
-
-
-string GetName(Client client) { return client.Name; }
-string GetPhoneNumber(Client client) { return client.PhoneNumber; }
-int GetAge(Client client) { return client.Age; }
-
 double GetAllAccountsMoney(Client client) {
 	double AllAccountsMoney = 0;
 	for (Account account : client.Accounts)
@@ -87,18 +81,6 @@ string InputClientPhoneNumber(string message) {
 		cin >> PhoneNumber;
 	} while (!verifyClientPhoneNumber(PhoneNumber));
 	return PhoneNumber;
-}
-
-Client InitClientFromConsole() {
-	Client NewClient;
-	string Name, PhoneNumber;
-	int Age;
-	NewClient.Name = InputClientName("Enter the name of the new client (First Name Last Name): ");
-	NewClient.Age = InputInt("Enter the age of the new client: ");
-	NewClient.PhoneNumber = InputClientPhoneNumber("Enter the phone number of the new client (X-XXX-XXX-XX-XX): ");
-
-	cout << "Client successfully registered" << endl;
-	return NewClient;
 }
 
 //---------------------------------------Account-----------------------------------------
