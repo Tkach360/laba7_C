@@ -12,35 +12,52 @@ enum TransactionResult {
 	OK // все ок
 };
 
-struct Transaction {
+class Transaction {
+private:
 	double money;
 	string CounterName;
 	int CounterAccountId;
 	tm Time;
+
+public:
+
 };
 
-struct Account {
+class Account {
+private:
 	int id;
 	double money;
 	std::vector<Transaction> Transactions;
 
 	string ClientName; // нужно чтобы при использовании NewTransaction не передавать ещё и имя
+
+public:
+
 };
 
-struct Deposit {
+class Deposit {
+private:
 	int year;
 	double percent; // в формате 1.XX..
 	double body;
+
+public:
+
 };
 
-struct Credit {
+class Credit {
+private:
 	int year;
 	double percent; // в формате 1.XX..
 	double body;
 	double contribution;
+
+public:
+
 };
 
-struct Client {
+class Client {
+private:
 	int Age;
 	string Name;
 	string PhoneNumber;
@@ -48,11 +65,17 @@ struct Client {
 	vector<Credit> Credits;
 	vector<Deposit> Deposits;
 	vector<Account> Accounts;
+
+public:
+	Client(string name, int age, string PhoneNumber) {
+		Name = name;
+		Age = age;
+		PhoneNumber = PhoneNumber;
+	}
 };
 
 //--------------------------Client-----------------------------------------------
 
-Client InitClient(string name, int age, string PhoneNumber);
 Client InitClientFromConsole();
 string GetName(Client client);
 string GetPhoneNumber(Client client);

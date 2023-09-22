@@ -41,13 +41,7 @@ double InputDouble(string message) {
 
 //------------------------------------------------Client------------------------------------------
 
-Client InitClient(string name, int age, string PhoneNumber) {
-	Client client;
-	client.Name = name;
-	client.Age = age;
-	client.PhoneNumber = PhoneNumber;
-	return client;
-}
+
 
 string GetName(Client client) { return client.Name; }
 string GetPhoneNumber(Client client) { return client.PhoneNumber; }
