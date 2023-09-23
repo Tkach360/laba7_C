@@ -74,6 +74,20 @@ public:
 		this->AddNewTransaction(NewTransactionForMyAccount);
 		CounterAccount->AddNewTransaction(NewTransactionForCounterAccount);
 	}
+	TransactionResult InputNewTransactionFromConsole(Account* CounterAccount) {
+		string message = "Enter the amount you wish to transfer from " + this->ClientName +
+			" account number " + to_string(this->GetID()) + " to " + CounterAccount->GetClientName() +
+			" account number " + to_string(CounterAccount->GetID()) + ": ";
+
+		double transactionMoney;
+		do {
+			transactionMoney = InputDouble(message);
+			if (transactionMoney == 0) cout << "The transfer amount cannot be zero" << endl;
+		} while (transactionMoney == 0);
+
+		MakeTransaction(CounterAccount, transactionMoney);
+		cout << "Operation was successfully completed" << endl;
+	}
 };
 
 class BankService {
