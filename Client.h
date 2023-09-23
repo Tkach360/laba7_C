@@ -116,7 +116,16 @@ public:
 class Deposit : public BankService {
 public:
 	Deposit();
-	Deposit(int Year, double Percent, double Body) : BankService(Year, Percent, Body){}
+	Deposit(int Year, double Percent, double Body) : BankService(Year, Percent, Body) {}
+
+	double GetFinalDepositAmount() {
+		double FinalDepositAmount = this->GetBody();
+		int Year = this->GetYear();
+		for (int i = 0; i < Year; i++) {
+			FinalDepositAmount *= this->GetPercent();
+		}
+		return FinalDepositAmount;
+	}
 };
 
 class Credit : public BankService {
@@ -245,10 +254,6 @@ public:
 		cout << "Money has been successfully deposited" << endl;
 	}
 };
-
-//--------------------------------------Deposit------------------------------------------
-
-double GetFinalDepositAmount(Deposit deposit);
 
 //-----------------------------------------------Transaction-------------------------
 void InputNewTransactionFromConsole(Account* Account_1, Account* Account_2);
