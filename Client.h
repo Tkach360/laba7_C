@@ -267,7 +267,12 @@ public:
 		AddNewDeposit(newDeposit);
 		cout << "Money has been successfully deposited" << endl;
 	}
-};
 
-//-----------------------------------------------Transaction-------------------------
-void InputNewTransactionFromConsole(Account* Account_1, Account* Account_2);
+	double GetAllAccountsMoney() {
+		double AllAccountsMoney = 0;
+		for (Account account : Accounts) {
+			AllAccountsMoney += account.GetMoney();
+		}
+		return AllAccountsMoney;
+	}
+};
