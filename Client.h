@@ -15,23 +15,19 @@ enum TransactionResult {
 
 class Transaction {
 protected:
+	bool Sent;
 	double Money;
-	string RecipientClientName;
-	string SenderClientName;
-	int RecipientAccountID;
-	int SenderAccountID;
+	string CounterClientName;
+	int CounterAccountID;
 	tm Time;
 
 public:
-	Transaction(string recipientClientName, string senderClientName, double money, 
-		int recipientAccountID, int senderAccountID) {
-
-		RecipientClientName = recipientClientName;
-		SenderClientName = senderClientName;
-		RecipientAccountID = recipientAccountID;
-		SenderAccountID = senderAccountID;
+	Transaction(Account CounterAccount, double Money, bool Sent) {
+		this->Sent = Sent;
+		this->CounterClientName = CounterAccount.GetClientName();
+		this->CounterAccountID = CounterAccount.GetID();
 		time_t now = time(NULL);
-		Time = (*localtime(&now));
+		this->Time = (*localtime(&now));
 	}
 };
 
@@ -41,29 +37,47 @@ protected:
 	double Money;
 	std::vector<Transaction> Transactions;
 
-	string ClientName; // нужно чтобы при использовании NewTransaction не передавать ещё и имя
+	string ClientName;
 
 public:
 	Account();
-	Account(int id, double money) {
-		ID = id;
-		Money = money;
+	Account(int ID, double Money, string ClientName) {
+		this->ID = ID;
+		this->Money = Money;
+		this->ClientName = ClientName;
 	}
 
 	int GetID() {
-		return ID;
+		return this->ID;
 	}
 	double GetMoney() {
-		return Money;
+		return this->Money;
+	}
+	string GetClientName() {
+		return this->ClientName;
 	}
 
 	void SetMoney(double newMoney) {
-		Money = newMoney;
+		this->Money = newMoney;
+	}
+
+	void AddNewTransaction(Transaction newTransaction) {
+		this->Transactions.push_back(newTransaction);
+	}
+	TransactionResult MakeTransaction(Account* CounterAccount, double transactionMoney) {
+		this->Money -= transactionMoney;
+		CounterAccount->SetMoney(CounterAccount->GetMoney() + transactionMoney);
+
+		Transaction NewTransactionForMyAccount(*CounterAccount, transactionMoney, true);
+		Transaction NewTransactionForCounterAccount(*this, -transactionMoney, false);
+
+		this->AddNewTransaction(NewTransactionForMyAccount);
+		CounterAccount->AddNewTransaction(NewTransactionForCounterAccount);
 	}
 };
 
 class BankService {
-	friend void Client::InputNewDepositFromConsole();
+	//friend void Client::InputNewDepositFromConsole();
 
 protected:
 	int Year;
@@ -72,37 +86,37 @@ protected:
 
 public:
 	BankService();
-	BankService(int year, double percent, double body) {
-		Year = year;
-		Percent = percent;
-		Body = body;
+	BankService(int Year, double Percent, double Body) {
+		this->Year = Year;
+		this->Percent = Percent;
+		this->Body = Body;
 	}
 
 	int GetYear() {
-		return Year;
+		return this->Year;
 	}
 	double GetPercent() {
-		return Percent;
+		return this->Percent;
 	}
 	double GetBody() {
-		return Body;
+		return this->Body;
 	}
 
 	void SetYear(int newYear) {
-		Year = newYear;
+		this->Year = newYear;
 	}
 	void SetBody(double newBody) {
-		Body = newBody;
+		this->Body = newBody;
 	}
 	void SetPercent(double newPercent) {
-		Percent = newPercent;
+		this->Percent = newPercent;
 	}
 };
 
 class Deposit : public BankService {
 public:
 	Deposit();
-	Deposit(int year, double percent, double body) : BankService(year, percent, body){}
+	Deposit(int Year, double Percent, double Body) : BankService(Year, Percent, Body){}
 };
 
 class Credit : public BankService {
@@ -111,12 +125,12 @@ protected:
 
 public:
 	Credit();
-	Credit(int year, double percent, double body, double contrib) : BankService(year, percent, body) {
-		Contrib = contrib;
+	Credit(int Year, double Percent, double Body, double Contrib) : BankService(Year, Percent, Body) {
+		this->Contrib = Contrib;
 	}
 
 	double GetContrib() {
-		return Contribution;
+		return this->Contrib;
 	}
 	void SetContrib(double newContrib) {
 		Contrib = newContrib;
@@ -135,33 +149,33 @@ protected:
 
 public:
 	Client();
-	Client(string name, int age, string PhoneNumber) {
-		Name = name;
-		Age = age;
-		PhoneNumber = PhoneNumber;
+	Client(string Name, int Age, string PhoneNumber) {
+		this->Name = Name;
+		this->Age = Age;
+		this->PhoneNumber = PhoneNumber;
 	}
 
 	string GetName() {
-		return Name;
+		return this->Name;
 	}
 	string GetPhoneNumber() {
-		return PhoneNumber;
+		return this->PhoneNumber;
 	}
 	int GetAge() {
-		return Age;
+		return this->Age;
 	}
 
 	void InputClientFromConsole() {
-		Name = InputClientName("Enter the name of the new client (First Name Last Name): ");
-		Age = InputInt("Enter the age of the new client: ");
-		PhoneNumber = InputClientPhoneNumber("Enter the phone number of the new client (X-XXX-XXX-XX-XX): ");
+		this->Name = InputClientName("Enter the name of the new client (First Name Last Name): ");
+		this->Age = InputInt("Enter the age of the new client: ");
+		this->PhoneNumber = InputClientPhoneNumber("Enter the phone number of the new client (X-XXX-XXX-XX-XX): ");
 
 		cout << "Client successfully registered" << endl;
 	}
 
 	void AddNewAccount(double money) {
-		Account newAccount(Accounts.size(), money);
-		Accounts.push_back(newAccount);
+		Account newAccount(Accounts.size(), money, Name);
+		this->Accounts.push_back(newAccount);
 	}
 	void InputNewAccountFromConsole() {
 		double money = InputDouble("Enter the initial amount in the account: ");
@@ -170,22 +184,12 @@ public:
 		cout << "Account created successfully" << endl;
 	}
 
-	void AddNewTransaction(Account *MyAccount, Account *AnotherAccount, double transactionMoney) {
-		MyAccount->SetMoney(MyAccount->GetMoney() - transactionMoney);
-		AnotherAccount->SetMoney(MyAccount->GetMoney() + transactionMoney);
-
-		Transaction 
-
-		MyAccount->Transactions.push_back(newTransactionForAccount_1);
-		AnotherAccount->Transactions.push_back(newTransactionForAccount_2);
-	}
-
 	void AddNewCredit(int Year, double Percent, double Body, double Contrib) {
 		Credit newCredit(Year, Percent, Body, Contrib);
-		Credits.push_back(newCredit);
+		this->Credits.push_back(newCredit);
 	}
 	void AddNewCredit(Credit newCredit) {
-		Credits.push_back(newCredit);
+		this->Credits.push_back(newCredit);
 	}
 	void InputNewCreditFromConsole() {
 		Credit newCredit;
@@ -203,10 +207,10 @@ public:
 
 	void AddNewDeposit(int Year, double Percent, double Body) {
 		Deposit newDeposit(Year, Percent, Body);
-		Deposits.push_back(newDeposit);
+		this->Deposits.push_back(newDeposit);
 	}
 	void AddNewDeposit(Deposit newDeposit) {
-		Deposits.push_back(newDeposit);
+		this->Deposits.push_back(newDeposit);
 	}
 	void InputNewDepositFromConsole() {
 		Deposit newDeposit;
@@ -222,11 +226,6 @@ public:
 	}
 };
 
-//---------------------------------------Account--------------------------------------
-
-int GetAccountId(Account account);
-double GetMoney(Account account);
-
 //-------------------------------------Credit-----------------------------------------
 
 double GetFinalContributionsPayments(Credit credit);
@@ -236,6 +235,4 @@ double GetFinalContributionsPayments(Credit credit);
 double GetFinalDepositAmount(Deposit deposit);
 
 //-----------------------------------------------Transaction-------------------------
-
-TransactionResult NewTransaction(Account* Account_1, Account* Account_2, double transactionMoney);
 void InputNewTransactionFromConsole(Account* Account_1, Account* Account_2);
