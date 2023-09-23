@@ -135,6 +135,26 @@ public:
 	void SetContrib(double newContrib) {
 		Contrib = newContrib;
 	}
+
+	double GetFinalContributionsPayments(Credit credit) {
+		double FinalContributionsPayments = 0;
+		int years = GetYear();
+		double body = GetBody();
+		double percent = GetPercent();
+		double contribution = GetContrib();
+		for (int i = 0; i < years; i++) {
+			if (body < contribution) {
+				FinalContributionsPayments += body;
+				body = 0;
+			}
+			else {
+				FinalContributionsPayments += contribution;
+				body -= contribution;
+				body *= percent;
+			}
+		}
+		return FinalContributionsPayments;
+	}
 };
 
 class Client {
@@ -225,10 +245,6 @@ public:
 		cout << "Money has been successfully deposited" << endl;
 	}
 };
-
-//-------------------------------------Credit-----------------------------------------
-
-double GetFinalContributionsPayments(Credit credit);
 
 //--------------------------------------Deposit------------------------------------------
 

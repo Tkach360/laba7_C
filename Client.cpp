@@ -83,43 +83,7 @@ string InputClientPhoneNumber(string message) {
 	return PhoneNumber;
 }
 
-//-------------------------------------Credit-----------------------------------------------------
-
-//double GetContribution(Credit credit) { return credit.contribution; }
-//double GetFinalContributionsPayments(Credit credit) {
-//	double FinalContributionsPayments = 0;
-//	int years = GetYear(credit);
-//	double body = GetBody(credit);
-//	double percent = GetPercent(credit);
-//	double contribution = GetContribution(credit);
-//	for (int i = 0; i < years; i++) {
-//		if (body < contribution) {
-//			FinalContributionsPayments += body;
-//			body = 0;
-//		}
-//		else {
-//			FinalContributionsPayments += contribution;
-//			body -= contribution;
-//			body *= percent;
-//		}
-//	}
-//	return FinalContributionsPayments;
-//}
-//
-
 //------------------------------------------NewTransaction--------------------------------------------
-
-//Transaction InitTransaction(Account account, string CounterName, double money) {
-//	Transaction newTransaction;
-//	newTransaction.money = money;
-//	newTransaction.CounterName = CounterName;
-//	newTransaction.CounterAccountId = GetAccountId(account);
-//
-//	time_t now = time(NULL);
-//	newTransaction.Time = (*localtime(&now));
-//
-//	return newTransaction;
-//}
 
 //TransactionResult NewTransaction(Account* Account_1, Account* Account_2, double transactionMoney) {
 //	if (Account_1->money - transactionMoney < 0) { // проверка, достаточно ли средств
