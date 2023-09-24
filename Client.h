@@ -144,6 +144,15 @@ public:
 	vector<Transaction> Transactions;
 
 	Account() {};
+	Account(int ID) {
+		this->ID = ID;
+	}
+	Account(double Balance) {
+		this->Balance = Balance;
+	}
+	Account(string ClientName) {
+		this->ClientName = ClientName;
+	}
 	Account(int ID, double Money, string ClientName) {
 		this->ID = ID;
 		this->Balance = Money;
@@ -200,6 +209,12 @@ protected:
 
 public:
 	BankService() {};
+	BankService(int Year) {
+		this->Year = Year;
+	}
+	BankService(double Body) {
+		this->Body = Body;
+	}
 	BankService(int Year, double Percent, double Body) {
 		this->Year = Year;
 		this->Percent = Percent;
@@ -231,6 +246,8 @@ public:
 class Deposit : public BankService {
 public:
 	Deposit() {};
+	Deposit(int Year) : BankService(Year) {};
+	Deposit(double Body) : BankService(Body) {};
 	Deposit(int Year, double Percent, double Body) : BankService(Year, Percent, Body) {}
 
 	double GetFinalDepositAmount() {
@@ -254,6 +271,8 @@ protected:
 
 public:
 	Credit() {};
+	Credit(int Year) : BankService(Year) {};
+	Credit(double Body) : BankService(Body) {};
 	Credit(int Year, double Percent, double Body, double Contrib) : BankService(Year, Percent, Body) {
 		this->Contrib = Contrib;
 	}
@@ -304,6 +323,12 @@ public:
 	vector<Account> Accounts;
 
 	Client(){};
+	Client(string Name) {
+		this->Name = Name;
+	}
+	Client(int Age) {
+		this->Age = Age;
+	}
 	Client(string Name, int Age, string PhoneNumber) {
 		this->Name = Name;
 		this->Age = Age;
