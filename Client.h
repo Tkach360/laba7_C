@@ -60,7 +60,6 @@ string InputClientPhoneNumber(string message) {
 	string PhoneNumber;
 	do {
 		cout << message;
-		cin >> PhoneNumber;
 	} while (!verifyClientPhoneNumber(PhoneNumber));
 	return PhoneNumber;
 }
@@ -354,6 +353,18 @@ public:
 	}
 	Account GetAccountByID(int ID) {
 		return Accounts[ID];
+	}
+
+	void SetPhoeNumber(string PhoneNumber) {
+		this->PhoneNumber = PhoneNumber;
+	}
+	void SetAge(int Age) {
+		this->Age = Age;
+	}
+	void SetName(string Name) {
+		this->Name = Name;
+		for (int i = 0; i < Accounts.size(); i++)
+			Accounts[i].ClientName = Name;
 	}
 
 	void InputClientFromConsole() {
