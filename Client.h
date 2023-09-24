@@ -75,31 +75,74 @@ class Transaction {
 protected:
 	bool Sent;
 	double Money;
+	string AlterClientName;
 	int AlterAccountID;
 	tm Time;
 
 public:
-	Transaction(int AlterAccountID, double Money, bool Sent) {
+	Transaction(string AlterClientName, int AlterAccountID, double Money, bool Sent) {
 		this->Sent = Sent;
 		this->AlterAccountID = AlterAccountID;
+		this->AlterClientName = AlterClientName;
+		this->Money = Money;
 		time_t now = time(NULL);
 		localtime_s(&this->Time, &now);
+	}
+
+	bool GetSent() {
+		return this->Sent;
+	}
+	double GetMoney() {
+		return this->Money;
+	}
+	string GetAlterClientName() {
+		return AlterClientName;
+	}
+	int GetAlterAccountID() {
+		return AlterAccountID;
+	}
+	tm GetTime() {
+		return Time;
+	}
+
+	void ShowInConsole() {
+		string strTime = to_string(Time.tm_mday) + "." + to_string(Time.tm_mon + 1) + "." 
+			+ to_string(Time.tm_year + 1900) + " " + to_string(Time.tm_hour) + ":" + to_string(Time.tm_min);
+		string strMoney, strAlterClientName, strAlterAccountID;
+
+		if (this->Sent) {
+			strMoney = "-" + to_string(this->Money);
+			strAlterClientName = "to " + this->AlterClientName;
+		}
+		else {
+			strMoney = "+" + to_string(Money);
+			strAlterClientName = "from " + this->AlterClientName;
+		}
+
+		strAlterAccountID = to_string(AlterAccountID);
+		cout << "Time: " + strTime + " " + strMoney + " " + strAlterClientName + " acc. " + strAlterAccountID << endl;
 	}
 };
 
 class Account {
+	friend class Client;
+
 protected:
 	int ID;
 	double Balance;
-	std::vector<Transaction> Transactions;
 
 	string ClientName;
 
 	void SetMoney(double newMoney) {
 		this->Balance = newMoney;
 	}
+	void AddNewTransaction(Transaction newTransaction) {
+		this->Transactions.push_back(newTransaction);
+	}
 
 public:
+	vector<Transaction> Transactions;
+
 	Account() {};
 	Account(int ID, double Money, string ClientName) {
 		this->ID = ID;
@@ -117,21 +160,17 @@ public:
 		return this->ClientName;
 	}
 
-
-	void AddNewTransaction(Transaction newTransaction) {
-		this->Transactions.push_back(newTransaction);
-	}
-	TransactionResult MakeTransaction(Account* AlterAccount, double transactionMoney) {
+	void MakeTransaction(Account* AlterAccount, double transactionMoney) {
 		this->Balance -= transactionMoney;
 		AlterAccount->SetMoney(AlterAccount->GetBalance() + transactionMoney);
 
-		Transaction NewTransactionForMyAccount(AlterAccount->GetID(), transactionMoney, true);
-		Transaction NewTransactionForCounterAccount(this->GetID(), -transactionMoney, false);
+		Transaction NewTransactionForMyAccount(AlterAccount->GetClientName(), AlterAccount->GetID(), transactionMoney, true);
+		Transaction NewTransactionForCounterAccount(AlterAccount->GetClientName(), this->GetID(), transactionMoney, false);
 
 		this->AddNewTransaction(NewTransactionForMyAccount);
 		AlterAccount->AddNewTransaction(NewTransactionForCounterAccount);
 	}
-	TransactionResult InputNewTransactionFromConsole(Account* AlterAccount) {
+	void InputNewTransactionFromConsole(Account* AlterAccount) {
 		string message = "Enter the amount you wish to transfer from " + this->ClientName +
 			" account number " + to_string(this->GetID()) + " to " + AlterAccount->GetClientName() +
 			" account number " + to_string(AlterAccount->GetID()) + ": ";
@@ -148,9 +187,6 @@ public:
 };
 
 class BankService {
-	//friend void Client::InputNewDepositFromConsole();
-	//friend void Client::InputNewCreditFromConsole();
-
 protected:
 	int Year;
 	double Percent; // в формате 1.XX..
@@ -206,7 +242,6 @@ class Credit : public BankService {
 protected:
 	double Contrib;
 
-
 public:
 	Credit() {};
 	Credit(int Year, double Percent, double Body, double Contrib) : BankService(Year, Percent, Body) {
@@ -243,7 +278,7 @@ public:
 };
 
 class Client {
-protected:
+private:
 	int Age;
 	string Name;
 	string PhoneNumber;
@@ -268,6 +303,9 @@ public:
 	}
 	int GetAge() {
 		return this->Age;
+	}
+	Account GetAccountByID(int ID) {
+		return Accounts[ID];
 	}
 
 	void InputClientFromConsole() {
