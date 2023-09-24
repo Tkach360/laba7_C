@@ -3,5 +3,6 @@
 
 int main() {
 	Client cli;
-	cli.InputClientFromConsole();
+	cli.AddNewAccount(10000);
+	cout << cli.Accounts[0].GetID();
 }

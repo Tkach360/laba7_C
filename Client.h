@@ -1,11 +1,69 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 #include <ctime>
 #include <vector>
-#include "Client.cpp"
+#include <regex>
 
 using namespace std;
+
+bool verifyInt(string ClientAge) {
+	regex ClientAgeRegex("\\d+");
+	if (regex_match(ClientAge, ClientAgeRegex)) return true;
+	else return false;
+}
+bool verifyDouble(const string& Money) {
+	regex MoneyRegex("[0-9]+([.,][0-9]+)?");
+	if (regex_match(Money, MoneyRegex)) {
+		return true;
+	}
+	else return false;
+}
+bool verifyClientName(const string& ClientName) {
+	regex ClientNameRegex("^[A-Za-z]*\\s[A-Za-z]*$"); ///////
+	cout << regex_match(ClientName, ClientNameRegex) << endl;
+	if (regex_match(ClientName, ClientNameRegex)) return true;
+	else return false;
+}
+bool verifyClientPhoneNumber(const string& PhoneNumber) {
+	regex PhoneNumberRegex("\\d{1}-\\d{3}-\\d{3}-\\d{2}-\\d{2}");
+	if (regex_match(PhoneNumber, PhoneNumberRegex)) return true;
+	else return false;
+}
+
+int InputInt(string message) {
+	string Age;
+	do {
+		cout << message;
+		cin >> Age;
+	} while (!verifyInt(Age));
+	return stoi(Age);
+}
+double InputDouble(string message) {
+	string Money;
+	do {
+		cout << message;
+		cin >> Money;
+	} while (!verifyDouble(Money));
+	return stod(Money);
+}
+string InputClientName(string message) {
+	string ClientName;
+	do {
+		cout << message;
+		getline(cin, ClientName);
+	} while (!verifyClientName(ClientName));
+	return ClientName;
+}
+string InputClientPhoneNumber(string message) {
+	string PhoneNumber;
+	do {
+		cout << message;
+		cin >> PhoneNumber;
+	} while (!verifyClientPhoneNumber(PhoneNumber));
+	return PhoneNumber;
+}
 
 enum TransactionResult {
 	InsufficientFunds, // недостаточно средств
@@ -17,17 +75,15 @@ class Transaction {
 protected:
 	bool Sent;
 	double Money;
-	string CounterClientName;
-	int CounterAccountID;
+	int AlterAccountID;
 	tm Time;
 
 public:
-	Transaction(Account CounterAccount, double Money, bool Sent) {
+	Transaction(int AlterAccountID, double Money, bool Sent) {
 		this->Sent = Sent;
-		this->CounterClientName = CounterAccount.GetClientName();
-		this->CounterAccountID = CounterAccount.GetID();
+		this->AlterAccountID = AlterAccountID;
 		time_t now = time(NULL);
-		this->Time = (*localtime(&now));
+		localtime_s(&this->Time, &now);
 	}
 };
 
@@ -44,7 +100,7 @@ protected:
 	}
 
 public:
-	Account();
+	Account() {};
 	Account(int ID, double Money, string ClientName) {
 		this->ID = ID;
 		this->Balance = Money;
@@ -65,20 +121,20 @@ public:
 	void AddNewTransaction(Transaction newTransaction) {
 		this->Transactions.push_back(newTransaction);
 	}
-	TransactionResult MakeTransaction(Account* CounterAccount, double transactionMoney) {
+	TransactionResult MakeTransaction(Account* AlterAccount, double transactionMoney) {
 		this->Balance -= transactionMoney;
-		CounterAccount->SetMoney(CounterAccount->GetBalance() + transactionMoney);
+		AlterAccount->SetMoney(AlterAccount->GetBalance() + transactionMoney);
 
-		Transaction NewTransactionForMyAccount(*CounterAccount, transactionMoney, true);
-		Transaction NewTransactionForCounterAccount(*this, -transactionMoney, false);
+		Transaction NewTransactionForMyAccount(AlterAccount->GetID(), transactionMoney, true);
+		Transaction NewTransactionForCounterAccount(this->GetID(), -transactionMoney, false);
 
 		this->AddNewTransaction(NewTransactionForMyAccount);
-		CounterAccount->AddNewTransaction(NewTransactionForCounterAccount);
+		AlterAccount->AddNewTransaction(NewTransactionForCounterAccount);
 	}
-	TransactionResult InputNewTransactionFromConsole(Account* CounterAccount) {
+	TransactionResult InputNewTransactionFromConsole(Account* AlterAccount) {
 		string message = "Enter the amount you wish to transfer from " + this->ClientName +
-			" account number " + to_string(this->GetID()) + " to " + CounterAccount->GetClientName() +
-			" account number " + to_string(CounterAccount->GetID()) + ": ";
+			" account number " + to_string(this->GetID()) + " to " + AlterAccount->GetClientName() +
+			" account number " + to_string(AlterAccount->GetID()) + ": ";
 
 		double transactionMoney;
 		do {
@@ -86,14 +142,14 @@ public:
 			if (transactionMoney == 0) cout << "The transfer amount cannot be zero" << endl;
 		} while (transactionMoney == 0);
 
-		MakeTransaction(CounterAccount, transactionMoney);
+		MakeTransaction(AlterAccount, transactionMoney);
 		cout << "Operation was successfully completed" << endl;
 	}
 };
 
 class BankService {
-	friend void Client::InputNewDepositFromConsole();
-	friend void Client::InputNewCreditFromConsole();
+	//friend void Client::InputNewDepositFromConsole();
+	//friend void Client::InputNewCreditFromConsole();
 
 protected:
 	int Year;
@@ -102,7 +158,7 @@ protected:
 
 
 public:
-	BankService();
+	BankService() {};
 	BankService(int Year, double Percent, double Body) {
 		this->Year = Year;
 		this->Percent = Percent;
@@ -133,7 +189,7 @@ public:
 
 class Deposit : public BankService {
 public:
-	Deposit();
+	Deposit() {};
 	Deposit(int Year, double Percent, double Body) : BankService(Year, Percent, Body) {}
 
 	double GetFinalDepositAmount() {
@@ -152,7 +208,7 @@ protected:
 
 
 public:
-	Credit();
+	Credit() {};
 	Credit(int Year, double Percent, double Body, double Contrib) : BankService(Year, Percent, Body) {
 		this->Contrib = Contrib;
 	}
@@ -192,12 +248,12 @@ protected:
 	string Name;
 	string PhoneNumber;
 
+public:
 	vector<Credit> Credits;
 	vector<Deposit> Deposits;
 	vector<Account> Accounts;
 
-public:
-	Client();
+	Client(){};
 	Client(string Name, int Age, string PhoneNumber) {
 		this->Name = Name;
 		this->Age = Age;
