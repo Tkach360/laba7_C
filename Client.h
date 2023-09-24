@@ -184,6 +184,11 @@ public:
 		MakeTransaction(AlterAccount, transactionMoney);
 		cout << "Operation was successfully completed" << endl;
 	}
+	void ShowInConsole() {
+		string Info = "Client: " + this->ClientName + " num: " + to_string(this->ID) +
+			" balance: " + to_string(this->Balance);
+		cout << Info << endl;
+	}
 };
 
 class BankService {
