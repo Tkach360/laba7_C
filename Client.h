@@ -198,6 +198,11 @@ public:
 			" balance: " + to_string(this->Balance);
 		cout << Info << endl;
 	}
+	void ShowAllTransactionInConsole() {
+		cout << "All transaction:" << endl;
+		for (Transaction transaction : Transactions)
+			transaction.ShowInConsole();
+	}
 };
 
 class BankService {
