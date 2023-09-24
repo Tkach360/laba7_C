@@ -203,6 +203,9 @@ public:
 		for (Transaction transaction : Transactions)
 			transaction.ShowInConsole();
 	}
+	vector<Transaction> GetAllTransactions() {
+		return this->Transactions;
+	}
 };
 
 class BankService {
