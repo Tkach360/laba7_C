@@ -429,4 +429,13 @@ public:
 		cout << "  Accounts: " + to_string(this->Accounts.size()) + " Credits: " +
 			to_string(this->Credits.size()) + " Deposits: " + to_string(this->Deposits.size()) << endl;
 	}
+	vector<Account> GetAllAccounts() {
+		return this->Accounts;
+	}
+	vector<Deposit> GetAllDeposits() {
+		return this->Deposits;
+	}
+	vector<Credit> GetAllCredits() {
+		return this->Credits;
+	}
 };
