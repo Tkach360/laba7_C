@@ -10,4 +10,10 @@ int main() {
 
 	cli.Accounts[1].Transactions[0].ShowInConsole();
 	cli.Accounts[0].Transactions[0].ShowInConsole();
+
+	cli.AddNewDeposit(10, 1.08, 100000);
+	cli.Deposits[0].ShowInConsole();
+
+	cli.AddNewCredit(10, 1.08, 100000, 9000);
+	cli.Credits[0].ShowInConsole();
 }

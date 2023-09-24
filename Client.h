@@ -236,6 +236,11 @@ public:
 		}
 		return FinalDepositAmount;
 	}
+	void ShowInConsole() {
+		string Info = "Deposit year: " + to_string(this->Year) + " body: " + to_string(this->Body) +
+			" percent: " + to_string(this->Percent);
+		cout << Info << endl;
+	}
 };
 
 class Credit : public BankService {
@@ -274,6 +279,11 @@ public:
 			}
 		}
 		return FinalContributionsPayments;
+	}
+	void ShowInConsole() {
+		string Info = "Credit year: " + to_string(this->Year) + " body: " + to_string(this->Body) +
+			" percent: " + to_string(this->Percent) + " contribution: " + to_string(this->Contrib);
+		cout << Info << endl;
 	}
 };
 
