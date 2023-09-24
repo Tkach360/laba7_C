@@ -434,6 +434,12 @@ public:
 		}
 		return AllAccountsMoney;
 	}
+	vector<Transaction> GetAllTransactions() {
+		vector<Transaction> AllTransactions;
+		for (Account account : Accounts)
+			AllTransactions.insert(AllTransactions.end(), account.Transactions.begin(), account.Transactions.end());
+		return AllTransactions;
+	}
 	void ShowInConsole() {
 		cout << "Name: " + this->Name + " Age: " + to_string(this->Age) + " Phone number: " + 
 			this->PhoneNumber << endl;
