@@ -39,17 +39,6 @@ double InputDouble(string message) {
 	return stod(Money);
 }
 
-//------------------------------------------------Client------------------------------------------
-
-//double GetAllAccountsMoney(Client client) {
-//	double AllAccountsMoney = 0;
-//	for (Account account : client.Accounts)
-//	{
-//		AllAccountsMoney += account.money;
-//	}
-//	return AllAccountsMoney;
-//}
-
 //---------------------------------InputClientFromConsole------------------------------------
 
 bool verifyClientName(const string& ClientName) {

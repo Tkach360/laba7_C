@@ -34,39 +34,40 @@ public:
 class Account {
 protected:
 	int ID;
-	double Money;
+	double Balance;
 	std::vector<Transaction> Transactions;
 
 	string ClientName;
+
+	void SetMoney(double newMoney) {
+		this->Balance = newMoney;
+	}
 
 public:
 	Account();
 	Account(int ID, double Money, string ClientName) {
 		this->ID = ID;
-		this->Money = Money;
+		this->Balance = Money;
 		this->ClientName = ClientName;
 	}
 
 	int GetID() {
 		return this->ID;
 	}
-	double GetMoney() {
-		return this->Money;
+	double GetBalance() {
+		return this->Balance;
 	}
 	string GetClientName() {
 		return this->ClientName;
 	}
 
-	void SetMoney(double newMoney) {
-		this->Money = newMoney;
-	}
 
 	void AddNewTransaction(Transaction newTransaction) {
 		this->Transactions.push_back(newTransaction);
 	}
 	TransactionResult MakeTransaction(Account* CounterAccount, double transactionMoney) {
-		this->Money -= transactionMoney;
-		CounterAccount->SetMoney(CounterAccount->GetMoney() + transactionMoney);
+		this->Balance -= transactionMoney;
+		CounterAccount->SetMoney(CounterAccount->GetBalance() + transactionMoney);
 
 		Transaction NewTransactionForMyAccount(*CounterAccount, transactionMoney, true);
 		Transaction NewTransactionForCounterAccount(*this, -transactionMoney, false);
@@ -91,12 +92,14 @@ public:
 };
 
 class BankService {
-	//friend void Client::InputNewDepositFromConsole();
+	friend void Client::InputNewDepositFromConsole();
+	friend void Client::InputNewCreditFromConsole();
 
 protected:
 	int Year;
 	double Percent; // в формате 1.XX..
 	double Body;
+
 
 public:
 	BankService();
@@ -104,6 +107,16 @@ public:
 		this->Year = Year;
 		this->Percent = Percent;
 		this->Body = Body;
+	}
+
+	void SetYear(int newYear) {
+		this->Year = newYear;
+	}
+	void SetBody(double newBody) {
+		this->Body = newBody;
+	}
+	void SetPercent(double newPercent) {
+		this->Percent = newPercent;
 	}
 
 	int GetYear() {
@@ -116,15 +129,6 @@ public:
 		return this->Body;
 	}
 
-	void SetYear(int newYear) {
-		this->Year = newYear;
-	}
-	void SetBody(double newBody) {
-		this->Body = newBody;
-	}
-	void SetPercent(double newPercent) {
-		this->Percent = newPercent;
-	}
 };
 
 class Deposit : public BankService {
@@ -146,17 +150,19 @@ class Credit : public BankService {
 protected:
 	double Contrib;
 
+
 public:
 	Credit();
 	Credit(int Year, double Percent, double Body, double Contrib) : BankService(Year, Percent, Body) {
 		this->Contrib = Contrib;
 	}
 
-	double GetContrib() {
-		return this->Contrib;
-	}
 	void SetContrib(double newContrib) {
 		Contrib = newContrib;
+	}
+
+	double GetContrib() {
+		return this->Contrib;
 	}
 
 	double GetFinalContributionsPayments(Credit credit) {
@@ -271,7 +277,7 @@ public:
 	double GetAllAccountsMoney() {
 		double AllAccountsMoney = 0;
 		for (Account account : Accounts) {
-			AllAccountsMoney += account.GetMoney();
+			AllAccountsMoney += account.GetBalance();
 		}
 		return AllAccountsMoney;
 	}
