@@ -64,6 +64,29 @@ string InputClientPhoneNumber(string message) {
 	return PhoneNumber;
 }
 
+bool CheckCredit(Credit credit) {
+	if (credit.GetBody() * (credit.GetPercent() - 1) >= credit.GetContrib()) return false;
+
+	int TrueYears = 0;
+	double Body = credit.GetBody();
+	for (TrueYears; Body > 0; TrueYears++)
+		Body -= Body * credit.GetPercent();
+	if (TrueYears != credit.GetYears()) return false;
+
+	return true;
+}
+bool CheckCredit(int years, double body, double percent, double contribution) {
+	if (body * (percent - 1) >= contribution) return false;
+
+	int TrueYears = 0;
+	double Body = body;
+	for (TrueYears; Body > 0; TrueYears++)
+		Body -= Body * percent;
+	if (TrueYears != years) return false;
+
+	return true;
+}
+
 enum TransactionResult {
 	InsufficientFunds, // недостаточно средств
 	NegativeAmount, // отрицательная сумма
@@ -209,27 +232,27 @@ public:
 
 class BankService {
 protected:
-	int Year;
+	int Years;
 	double Percent; // в формате 1.XX..
 	double Body;
 
 
 public:
 	BankService() {};
-	BankService(int Year) {
-		this->Year = Year;
+	BankService(int Years) {
+		this->Years = Years;
 	}
 	BankService(double Body) {
 		this->Body = Body;
 	}
-	BankService(int Year, double Percent, double Body) {
-		this->Year = Year;
+	BankService(int Years, double Percent, double Body) {
+		this->Years = Years;
 		this->Percent = Percent;
 		this->Body = Body;
 	}
 
 	void SetYear(int newYear) {
-		this->Year = newYear;
+		this->Years = newYear;
 	}
 	void SetBody(double newBody) {
 		this->Body = newBody;
@@ -238,8 +261,8 @@ public:
 		this->Percent = newPercent;
 	}
 
-	int GetYear() {
-		return this->Year;
+	int GetYears() {
+		return this->Years;
 	}
 	double GetPercent() {
 		return this->Percent;
@@ -253,20 +276,20 @@ public:
 class Deposit : public BankService {
 public:
 	Deposit() {};
-	Deposit(int Year) : BankService(Year) {};
+	Deposit(int Years) : BankService(Years) {};
 	Deposit(double Body) : BankService(Body) {};
-	Deposit(int Year, double Percent, double Body) : BankService(Year, Percent, Body) {}
+	Deposit(int Years, double Percent, double Body) : BankService(Years, Percent, Body) {}
 
 	double GetFinalDepositAmount() {
 		double FinalDepositAmount = this->GetBody();
-		int Year = this->GetYear();
-		for (int i = 0; i < Year; i++) {
+		int Years = this->GetYears();
+		for (int i = 0; i < Years; i++) {
 			FinalDepositAmount *= this->GetPercent();
 		}
 		return FinalDepositAmount;
 	}
 	void ShowInConsole() {
-		string Info = "Deposit year: " + to_string(this->Year) + " body: " + to_string(this->Body) +
+		string Info = "Deposit year: " + to_string(this->Years) + " body: " + to_string(this->Body) +
 			" percent: " + to_string(this->Percent);
 		cout << Info << endl;
 	}
@@ -278,9 +301,9 @@ protected:
 
 public:
 	Credit() {};
-	Credit(int Year) : BankService(Year) {};
+	Credit(int Years) : BankService(Years) {};
 	Credit(double Body) : BankService(Body) {};
-	Credit(int Year, double Percent, double Body, double Contrib) : BankService(Year, Percent, Body) {
+	Credit(int Years, double Percent, double Body, double Contrib) : BankService(Years, Percent, Body) {
 		this->Contrib = Contrib;
 	}
 
@@ -294,7 +317,7 @@ public:
 
 	double GetFinalContributionsPayments(Credit credit) {
 		double FinalContributionsPayments = 0;
-		int years = GetYear();
+		int years = GetYears();
 		double body = GetBody();
 		double percent = GetPercent();
 		double contribution = GetContrib();
@@ -312,7 +335,7 @@ public:
 		return FinalContributionsPayments;
 	}
 	void ShowInConsole() {
-		string Info = "Credit year: " + to_string(this->Year) + " body: " + to_string(this->Body) +
+		string Info = "Credit year: " + to_string(this->Years) + " body: " + to_string(this->Body) +
 			" percent: " + to_string(this->Percent) + " contribution: " + to_string(this->Contrib);
 		cout << Info << endl;
 	}
