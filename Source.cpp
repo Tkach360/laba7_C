@@ -4,6 +4,8 @@
 int main() {
 
 	Client cli("Robert", 29, "8-964-876-99-88");
+	cli.ShowInConsole();
+
 	cli.AddNewAccount(10000);
 	cli.AddNewAccount(2000);
 	cli.Accounts[0].ShowInConsole();

@@ -390,4 +390,10 @@ public:
 		}
 		return AllAccountsMoney;
 	}
+	void ShowInConsole() {
+		cout << "Name: " + this->Name + " Age: " + to_string(this->Age) + " Phone number: " + 
+			this->PhoneNumber << endl;
+		cout << "  Accounts: " + to_string(this->Accounts.size()) + " Credits: " +
+			to_string(this->Credits.size()) + " Deposits: " + to_string(this->Deposits.size()) << endl;
+	}
 };
