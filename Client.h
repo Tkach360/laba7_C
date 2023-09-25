@@ -184,10 +184,19 @@ public:
 			" account number " + to_string(AlterAccount->GetID()) + ": ";
 
 		double transactionMoney;
+		bool flag;
 		do {
+			flag = false;
 			transactionMoney = InputDouble(message);
-			if (transactionMoney == 0) cout << "The transfer amount cannot be zero" << endl;
-		} while (transactionMoney == 0);
+			if (transactionMoney == 0) {
+				cout << "The transfer amount cannot be zero" << endl;
+				flag = true;
+			}
+			if (transactionMoney > Balance) {
+				cout << "Insufficient funds in the account" << endl;
+				flag = true;
+			}
+		} while (flag);
 
 		MakeTransaction(AlterAccount, transactionMoney);
 		cout << "Operation was successfully completed" << endl;
