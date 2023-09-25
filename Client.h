@@ -71,6 +71,7 @@ enum TransactionResult {
 };
 
 class Transaction {
+	friend class Account;
 protected:
 	bool Sent;
 	double Money;
@@ -78,7 +79,6 @@ protected:
 	int AlterAccountID;
 	tm Time;
 
-public:
 	Transaction(string AlterClientName, int AlterAccountID, double Money, bool Sent) {
 		this->Sent = Sent;
 		this->AlterAccountID = AlterAccountID;
@@ -87,6 +87,8 @@ public:
 		time_t now = time(NULL);
 		localtime_s(&this->Time, &now);
 	}
+
+public:
 
 	bool GetSent() {
 		return this->Sent;
@@ -142,14 +144,29 @@ protected:
 public:
 	vector<Transaction> Transactions;
 
-	Account() {};
+	Account() {
+		this->Balance = 0;
+		this->ID = -1;
+		this->ClientName = "NONE";
+	}
 	Account(int ID) {
 		this->ID = ID;
+		this->Balance = 0;
+		this->ClientName = "NONE";
 	}
 	Account(double Balance) {
 		this->Balance = Balance;
+		this->ID = -1;
+		this->ClientName = "NONE";
 	}
 	Account(string ClientName) {
+		this->Balance = 0;
+		this->ID = -1;
+		this->ClientName = ClientName;
+	}
+	Account(int ID, string ClientName) {
+		this->ID = ID;
+		this->Balance = 0;
 		this->ClientName = ClientName;
 	}
 	Account(int ID, double Money, string ClientName) {
@@ -224,12 +241,20 @@ protected:
 
 
 public:
-	BankService() {};
+	BankService() {
+		this->Years = -1;
+		this->Percent = -1;
+		this->Body = -1;
+	}
 	BankService(int Years) {
 		this->Years = Years;
+		this->Percent = -1;
+		this->Body = -1;
 	}
 	BankService(double Body) {
 		this->Body = Body;
+		this->Years = -1;
+		this->Percent = -1;
 	}
 	BankService(int Years, double Percent, double Body) {
 		this->Years = Years;
@@ -261,7 +286,7 @@ public:
 
 class Deposit : public BankService {
 public:
-	Deposit() {};
+	Deposit() : BankService() {};
 	Deposit(int Years) : BankService(Years) {};
 	Deposit(double Body) : BankService(Body) {};
 	Deposit(int Years, double Percent, double Body) : BankService(Years, Percent, Body) {}
@@ -286,7 +311,7 @@ protected:
 	double Contrib;
 
 public:
-	Credit() {};
+	Credit() : BankService() {};
 	Credit(int Years) : BankService(Years) {};
 	Credit(double Body) : BankService(Body) {};
 	Credit(int Years, double Percent, double Body, double Contrib) : BankService(Years, Percent, Body) {
@@ -301,7 +326,7 @@ public:
 		return this->Contrib;
 	}
 
-	double GetFinalContributionsPayments(Credit credit) {
+	double GetFinalContributionsPayments() {
 		double FinalContributionsPayments = 0;
 		int years = GetYears();
 		double body = GetBody();
@@ -374,12 +399,20 @@ public:
 	vector<Deposit> Deposits;
 	vector<Account> Accounts;
 
-	Client() {};
+	Client() {
+		this->Name = "NONE";
+		this->Age = -1;
+		this->PhoneNumber = "NONE";
+	}
 	Client(string Name) {
 		this->Name = Name;
+		this->Age = -1;
+		this->PhoneNumber = "NONE";
 	}
 	Client(int Age) {
 		this->Age = Age;
+		this->Name = "NONE";
+		this->PhoneNumber = "NONE";
 	}
 	Client(string Name, int Age, string PhoneNumber) {
 		this->Name = Name;
