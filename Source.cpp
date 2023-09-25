@@ -30,10 +30,10 @@ int main() {
 	cli.Accounts[0].ShowAllTransactionInConsole();
 
 	cout << "\n7) Test GetFinalContributionsPayments" << endl;
-	cli.Credits[0].GetFinalContributionsPayments();
+	cout << "Final contrib pay: " << cli.Credits[0].GetFinalContributionsPayments() << endl;
 
 	cout << "\n8) Test GetFinalDepositAmount" << endl;
-	cli.Deposits[0].GetFinalDepositAmount();
+	cout << "Final deposit amount: " << cli.Deposits[0].GetFinalDepositAmount() << endl;
 
 	cout << "\n9) Test InputClientFromConsole" << endl;
 	Client cli_c;
