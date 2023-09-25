@@ -64,29 +64,6 @@ string InputClientPhoneNumber(string message) {
 	return PhoneNumber;
 }
 
-bool CheckCredit(Credit credit) {
-	if (credit.GetBody() * (credit.GetPercent() - 1) >= credit.GetContrib()) return false;
-
-	int TrueYears = 0;
-	double Body = credit.GetBody();
-	for (TrueYears; Body > 0; TrueYears++)
-		Body -= Body * credit.GetPercent();
-	if (TrueYears != credit.GetYears()) return false;
-
-	return true;
-}
-bool CheckCredit(int years, double body, double percent, double contribution) {
-	if (body * (percent - 1) >= contribution) return false;
-
-	int TrueYears = 0;
-	double Body = body;
-	for (TrueYears; Body > 0; TrueYears++)
-		Body -= Body * percent;
-	if (TrueYears != years) return false;
-
-	return true;
-}
-
 enum TransactionResult {
 	InsufficientFunds, // недостаточно средств
 	NegativeAmount, // отрицательна€ сумма
@@ -128,7 +105,7 @@ public:
 	}
 
 	void ShowInConsole() {
-		string strTime = to_string(Time.tm_mday) + "." + to_string(Time.tm_mon + 1) + "." 
+		string strTime = to_string(Time.tm_mday) + "." + to_string(Time.tm_mon + 1) + "."
 			+ to_string(Time.tm_year + 1900) + " " + to_string(Time.tm_hour) + ":" + to_string(Time.tm_min);
 		string strMoney, strAlterClientName, strAlterAccountID;
 
@@ -339,6 +316,42 @@ public:
 			" percent: " + to_string(this->Percent) + " contribution: " + to_string(this->Contrib);
 		cout << Info << endl;
 	}
+	bool CheckThisCredit() {
+		if (!(this->Years > 0 && this->Body > this->Contrib && this->Percent > 1)) return false;
+		if (this->Body * (this->Percent - 1) >= this->Contrib) return false;
+
+		int TrueYears = 0;
+		double Body = this->Body;
+		for (TrueYears; Body > 0; TrueYears++)
+			Body -= Body * this->Percent;
+		if (TrueYears != this->Years) return false;
+
+		return true;
+	}
+	static bool CheckCredit(Credit credit) {
+		if (!(credit.GetYears() > 0 && credit.GetBody() > credit.GetContrib() && credit.GetPercent() > 1)) return false;
+		if (credit.GetBody() * (credit.GetPercent() - 1) >= credit.GetContrib()) return false;
+
+		int TrueYears = 0;
+		double Body = credit.GetBody();
+		for (TrueYears; Body > 0; TrueYears++)
+			Body -= Body * credit.GetPercent();
+		if (TrueYears != credit.GetYears()) return false;
+
+		return true;
+	}
+	static bool CheckCredit(int years, double body, double percent, double contribution) {
+		if (!(years > 0 && body > contribution && percent > 1)) return false;
+		if (body * (percent - 1) >= contribution) return false;
+
+		int TrueYears = 0;
+		double Body = body;
+		for (TrueYears; Body > 0; TrueYears++)
+			Body -= Body * percent;
+		if (TrueYears != years) return false;
+
+		return true;
+	}
 };
 
 class Client {
@@ -352,7 +365,7 @@ public:
 	vector<Deposit> Deposits;
 	vector<Account> Accounts;
 
-	Client(){};
+	Client() {};
 	Client(string Name) {
 		this->Name = Name;
 	}
@@ -464,7 +477,7 @@ public:
 		return AllTransactions;
 	}
 	void ShowInConsole() {
-		cout << "Name: " + this->Name + " Age: " + to_string(this->Age) + " Phone number: " + 
+		cout << "Name: " + this->Name + " Age: " + to_string(this->Age) + " Phone number: " +
 			this->PhoneNumber << endl;
 		cout << "  Accounts: " + to_string(this->Accounts.size()) + " Credits: " +
 			to_string(this->Credits.size()) + " Deposits: " + to_string(this->Deposits.size()) << endl;

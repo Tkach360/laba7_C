@@ -3,6 +3,8 @@
 
 int main() {
 
+	Credit::CheckCredit(10, 1000, 1.04, 40);
+
 	Client cli("Robert", 29, "8-964-876-99-88");
 	cli.ShowInConsole();
 
