@@ -50,11 +50,15 @@ int main() {
 	for (int i = 0; i < 3; i++) 
 		cout << cli_arr[i].GetName() << endl;
 
+	delete[] cli_arr;
+
 	cout << "\n" << ++test << ") Test of an array of dynamic class objects " << endl;
 	Client* cli_d_arr[3]{ new Client("Guts"), new Client("Griffits"), new Client("Stepan") };
 	for (int i = 0; i < 3; i++)
 		cout << cli_d_arr[i]->GetName() << endl;
 
+	for (int i = 0; i < 3; i++)
+		delete cli_d_arr[i];
 
 
 	cout << "\n" << ++test << ") Test InputClientFromConsole" << endl;
