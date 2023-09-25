@@ -87,9 +87,11 @@ protected:
 		time_t now = time(NULL);
 		localtime_s(&this->Time, &now);
 	}
+	~Transaction() {
+		delete& this->Sent, & this->Money, & this->AlterClientName, & this->AlterAccountID, & this->Time;
+	}
 
 public:
-
 	bool GetSent() {
 		return this->Sent;
 	}
@@ -133,6 +135,10 @@ protected:
 	double Balance;
 
 	string ClientName;
+
+	~Account() {
+		delete& ID, & Balance, & ClientName, &Transactions;
+	}
 
 	void SetMoney(double newMoney) {
 		this->Balance = newMoney;
@@ -234,11 +240,11 @@ public:
 };
 
 class BankService {
+	friend class Client;
 protected:
 	int Years;
 	double Percent; // в формате 1.XX..
 	double Body;
-
 
 public:
 	BankService() {
@@ -285,6 +291,11 @@ public:
 };
 
 class Deposit : public BankService {
+	friend class Client;
+protected:
+	~Deposit() {
+		delete& this->Years, & this->Percent, & this->Body;
+	}
 public:
 	Deposit() : BankService() {};
 	Deposit(int Years) : BankService(Years) {};
@@ -307,8 +318,12 @@ public:
 };
 
 class Credit : public BankService {
+	friend class Client;
 protected:
 	double Contrib;
+	~Credit() {
+		delete& this->Body, & this->Contrib, & this->Percent, & this->Years;
+	}
 
 public:
 	Credit() : BankService() {};
@@ -418,6 +433,10 @@ public:
 		this->Name = Name;
 		this->Age = Age;
 		this->PhoneNumber = PhoneNumber;
+	}
+
+	~Client() {
+		delete& this->Age, & this->Name, & this->PhoneNumber, & this->Credits, & this->Deposits, & this->Accounts;
 	}
 
 	string GetName() {
