@@ -64,12 +64,6 @@ string InputClientPhoneNumber(string message) {
 	return PhoneNumber;
 }
 
-enum TransactionResult {
-	InsufficientFunds, // недостаточно средств
-	NegativeAmount, // отрицательная сумма
-	OK // все ок
-};
-
 class Transaction {
 	friend class Account;
 protected:
