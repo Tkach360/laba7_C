@@ -234,7 +234,6 @@ protected:
 	double Percent; // в формате 1.XX..
 	double Body;
 
-public:
 	BankService() {
 		this->Years = -1;
 		this->Percent = -1;
@@ -255,6 +254,7 @@ public:
 		this->Percent = Percent;
 		this->Body = Body;
 	}
+public:
 
 	void SetYear(int newYear) {
 		this->Years = newYear;
