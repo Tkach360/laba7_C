@@ -66,7 +66,7 @@ string InputClientPhoneNumber(string message) {
 
 class Transaction {
 	friend class Account;
-protected:
+private:
 	bool Sent;
 	double Money;
 	string AlterClientName;
@@ -80,9 +80,6 @@ protected:
 		this->Money = Money;
 		time_t now = time(NULL);
 		localtime_s(&this->Time, &now);
-	}
-	~Transaction() {
-		delete& this->Sent, & this->Money, & this->AlterClientName, & this->AlterAccountID, & this->Time;
 	}
 
 public:
@@ -124,15 +121,12 @@ public:
 class Account {
 	friend class Client;
 
-protected:
+private:
 	int ID;
 	double Balance;
 
 	string ClientName;
 
-	~Account() {
-		delete& ID, & Balance, & ClientName, &Transactions;
-	}
 
 	void SetMoney(double newMoney) {
 		this->Balance = newMoney;
@@ -286,10 +280,6 @@ public:
 
 class Deposit : public BankService {
 	friend class Client;
-protected:
-	~Deposit() {
-		delete& this->Years, & this->Percent, & this->Body;
-	}
 public:
 	Deposit() : BankService() {};
 	Deposit(int Years) : BankService(Years) {};
@@ -313,11 +303,8 @@ public:
 
 class Credit : public BankService {
 	friend class Client;
-protected:
+private:
 	double Contrib;
-	~Credit() {
-		delete& this->Body, & this->Contrib, & this->Percent, & this->Years;
-	}
 
 public:
 	Credit() : BankService() {};
@@ -427,10 +414,6 @@ public:
 		this->Name = Name;
 		this->Age = Age;
 		this->PhoneNumber = PhoneNumber;
-	}
-
-	~Client() {
-		delete& this->Age, & this->Name, & this->PhoneNumber, & this->Credits, & this->Deposits, & this->Accounts;
 	}
 
 	string GetName() {
