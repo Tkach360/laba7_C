@@ -28,7 +28,7 @@ bool verifyClientPhoneNumber(const string& PhoneNumber) {
 	else return false;
 }
 
-int InputInt(string message) {
+int inputInt(string message) {
 	string Age;
 	do {
 		cout << message;
@@ -36,7 +36,7 @@ int InputInt(string message) {
 	} while (!verifyInt(Age));
 	return stoi(Age);
 }
-double InputDouble(string message) {
+double inputDouble(string message) {
 	string Money;
 	do {
 		cout << message;
@@ -44,7 +44,7 @@ double InputDouble(string message) {
 	} while (!verifyDouble(Money));
 	return stod(Money);
 }
-string InputClientName(string message) {
+string inputClientName(string message) {
 	string ClientName;
 	do {
 		cout << message;
@@ -52,7 +52,7 @@ string InputClientName(string message) {
 	} while (!verifyClientName(ClientName));
 	return ClientName;
 }
-string InputClientPhoneNumber(string message) {
+string inputClientPhoneNumber(string message) {
 	string PhoneNumber;
 	do {
 		cout << message;

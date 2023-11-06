@@ -4,50 +4,52 @@
 class BankService {
 	friend class Client;
 protected:
-	int Years;
-	double Percent; // в формате 1.XX..
-	double Body;
+	int years;
+	double percent; // в формате 1.XX..
+	double body;
 
 	BankService() {
-		this->Years = -1;
-		this->Percent = -1;
-		this->Body = -1;
+		this->years = -1;
+		this->percent = -1;
+		this->body = -1;
 	}
-	BankService(int Years) {
-		this->Years = Years;
-		this->Percent = -1;
-		this->Body = -1;
+	BankService(int years) {
+		this->years = years;
+		this->percent = -1;
+		this->body = -1;
 	}
-	BankService(double Body) {
-		this->Body = Body;
-		this->Years = -1;
-		this->Percent = -1;
+	BankService(double body) {
+		this->body = body;
+		this->years = -1;
+		this->percent = -1;
 	}
-	BankService(int Years, double Percent, double Body) {
-		this->Years = Years;
-		this->Percent = Percent;
-		this->Body = Body;
+	BankService(int years, double percent, double body) {
+		this->years = years;
+		this->percent = percent;
+		this->body = body;
 	}
 public:
 
-	void SetYear(int newYear) {
-		this->Years = newYear;
+	void setYear(int newYear) {
+		this->years = newYear;
 	}
-	void SetBody(double newBody) {
-		this->Body = newBody;
+	void setBody(double newBody) {
+		this->body = newBody;
 	}
-	void SetPercent(double newPercent) {
-		this->Percent = newPercent;
+	void setPercent(double newPercent) {
+		this->percent = newPercent;
 	}
 
-	int GetYears() {
-		return this->Years;
+	int getYears() {
+		return this->years;
 	}
-	double GetPercent() {
-		return this->Percent;
+	double getPercent() {
+		return this->percent;
 	}
-	double GetBody() {
-		return this->Body;
+	double getBody() {
+		return this->body;
 	}
+
+	virtual void showInConsole() {};
 
 };

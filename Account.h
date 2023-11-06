@@ -10,15 +10,14 @@ class Account {
 
 private:
 	int ID;
-	double Balance;
+	double balance;
 
 	Client* client;
 
-
-	void SetMoney(double newMoney) {
-		this->Balance = newMoney;
+	void setMoney(double newMoney) {
+		this->balance = newMoney;
 	}
-	void AddNewTransaction(Transaction newTransaction) {
+	void addNewTransaction(Transaction newTransaction) {
 		this->Transactions.push_back(newTransaction);
 	}
 
@@ -27,54 +26,54 @@ public:
 
 	Account(Client* client) {
 		this->client = client;
-		this->Balance = 0;
+		this->balance = 0;
 		this->ID = -1;
 	}
 	Account(Client* client, int ID) {
 		this->client = client;
 		this->ID = ID;
-		this->Balance = 0;
+		this->balance = 0;
 	}
-	Account(Client* client, double Balance) {
+	Account(Client* client, double balance) {
 		this->client = client;
-		this->Balance = Balance;
+		this->balance = balance;
 		this->ID = -1;
 	}
 	Account(Client* client, int ID, double Money) {
 		this->client = client;
 		this->ID = ID;
-		this->Balance = Money;
+		this->balance = Money;
 	}
 
-	int GetID() {
+	int getID() {
 		return this->ID;
 	}
-	double GetBalance() {
-		return this->Balance;
+	double getBalance() {
+		return this->balance;
 	}
-	string GetClientName();
+	string getClientName();
 
-	void MakeTransaction(Account* AlterAccount, double transactionMoney) {
-		this->Balance -= transactionMoney;
-		AlterAccount->SetMoney(AlterAccount->GetBalance() + transactionMoney);
+	void makeTransaction(Account* alterAccount, double transactionMoney) {
+		this->balance -= transactionMoney;
+		alterAccount->setMoney(alterAccount->getBalance() + transactionMoney);
 
-		Transaction NewTransactionForMyAccount(AlterAccount->GetClientName(), AlterAccount->GetID(), transactionMoney, true);
-		Transaction NewTransactionForCounterAccount(AlterAccount->GetClientName(), this->GetID(), transactionMoney, false);
+		Transaction NewTransactionForMyAccount(alterAccount->getClientName(), alterAccount->getID(), transactionMoney, true);
+		Transaction NewTransactionForCounterAccount(alterAccount->getClientName(), this->getID(), transactionMoney, false);
 
-		this->AddNewTransaction(NewTransactionForMyAccount);
-		AlterAccount->AddNewTransaction(NewTransactionForCounterAccount);
+		this->addNewTransaction(NewTransactionForMyAccount);
+		alterAccount->addNewTransaction(NewTransactionForCounterAccount);
 	}
-	void InputNewTransactionFromConsole(Account* AlterAccount);
+	void inputNewTransactionFromConsole(Account* alterAccount);
 
-	void ShowInConsole();
+	void showInConsole();
 
-	void ShowAllTransactionInConsole() {
+	void showAllTransactionInConsole() {
 		cout << "All transaction:" << endl;
 		for (Transaction transaction : Transactions)
-			transaction.ShowInConsole();
+			transaction.showInConsole();
 	}
 
-	vector<Transaction> GetAllTransactions() {
+	vector<Transaction> getAllTransactions() {
 		return this->Transactions;
 	}
 };

@@ -9,30 +9,30 @@ using namespace std;
 class Credit : public BankService {
 	friend class Client;
 private:
-	double Contrib;
+	double contrib;
 
 public:
 	Credit() : BankService() {};
-	Credit(int Years) : BankService(Years) {};
-	Credit(double Body) : BankService(Body) {};
-	Credit(int Years, double Percent, double Body, double Contrib) : BankService(Years, Percent, Body) {
-		this->Contrib = Contrib;
+	Credit(int years) : BankService(years) {};
+	Credit(double body) : BankService(body) {};
+	Credit(int years, double percent, double body, double contrib) : BankService(years, percent, body) {
+		this->contrib = contrib;
 	}
 
-	void SetContrib(double newContrib) {
-		Contrib = newContrib;
+	void setContrib(double newContrib) {
+		contrib = newContrib;
 	}
 
-	double GetContrib() {
-		return this->Contrib;
+	double getContrib() {
+		return this->contrib;
 	}
 
-	double GetFinalContributionsPayments() {
+	double getFinalContributionsPayments() {
 		double FinalContributionsPayments = 0;
-		int years = GetYears();
-		double body = GetBody();
-		double percent = GetPercent();
-		double contribution = GetContrib();
+		int years = getYears();
+		double body = getBody();
+		double percent = getPercent();
+		double contribution = getContrib();
 		for (int i = 0; i < years; i++) {
 			if (body < contribution) {
 				FinalContributionsPayments += body;
@@ -46,43 +46,43 @@ public:
 		}
 		return FinalContributionsPayments;
 	}
-	void ShowInConsole() {
-		string Info = "Credit year: " + to_string(this->Years) + " body: " + to_string(this->Body) +
-			" percent: " + to_string(this->Percent) + " contribution: " + to_string(this->Contrib);
+	void showInConsole() {
+		string Info = "Credit year: " + to_string(this->years) + " body: " + to_string(this->body) +
+			" percent: " + to_string(this->percent) + " contribution: " + to_string(this->contrib);
 		cout << Info << endl;
 	}
-	bool CheckThisCredit() {
-		if (!(this->Years > 0 && this->Body > this->Contrib && this->Percent > 1)) return false;
-		if (this->Body * (this->Percent - 1) >= this->Contrib) return false;
+	bool checkThisCredit() {
+		if (!(this->years > 0 && this->body > this->contrib && this->percent > 1)) return false;
+		if (this->body * (this->percent - 1) >= this->contrib) return false;
 
 		int TrueYears = 0;
-		double Body = this->Body;
-		for (TrueYears; Body > 0; TrueYears++)
-			Body -= Body * this->Percent;
-		if (TrueYears != this->Years) return false;
+		double body = this->body;
+		for (TrueYears; body > 0; TrueYears++)
+			body -= body * this->percent;
+		if (TrueYears != this->years) return false;
 
 		return true;
 	}
-	static bool CheckCredit(Credit credit) {
-		if (!(credit.GetYears() > 0 && credit.GetBody() > credit.GetContrib() && credit.GetPercent() > 1)) return false;
-		if (credit.GetBody() * (credit.GetPercent() - 1) >= credit.GetContrib()) return false;
+	static bool checkCredit(Credit credit) {
+		if (!(credit.getYears() > 0 && credit.getBody() > credit.getContrib() && credit.getPercent() > 1)) return false;
+		if (credit.getBody() * (credit.getPercent() - 1) >= credit.getContrib()) return false;
 
 		int TrueYears = 0;
-		double Body = credit.GetBody();
-		for (TrueYears; Body > 0; TrueYears++)
-			Body -= Body * credit.GetPercent();
-		if (TrueYears != credit.GetYears()) return false;
+		double body = credit.getBody();
+		for (TrueYears; body > 0; TrueYears++)
+			body -= body * credit.getPercent();
+		if (TrueYears != credit.getYears()) return false;
 
 		return true;
 	}
-	static bool CheckCredit(int years, double body, double percent, double contribution) {
+	static bool checkCredit(int years, double body, double percent, double contribution) {
 		if (!(years > 0 && body > contribution && percent > 1)) return false;
 		if (body * (percent - 1) >= contribution) return false;
 
 		int TrueYears = 0;
-		double Body = body;
-		for (TrueYears; Body > 0; TrueYears++)
-			Body -= Body * percent;
+		double body_credit = body;
+		for (TrueYears; body_credit > 0; TrueYears++)
+			body_credit -= body_credit * percent;
 		if (TrueYears != years) return false;
 
 		return true;
