@@ -9,9 +9,10 @@ class Account {
 	friend class Client;
 
 private:
+	static int nextUniqueID;  // уникальный ID
+
 	int ID;
 	double balance;
-
 	Client* client;
 
 	void setMoney(double newMoney) {
@@ -27,21 +28,25 @@ public:
 	Account(Client* client) {
 		this->client = client;
 		this->balance = 0;
-		this->ID = -1;
+		this->ID = nextUniqueID;
+		++nextUniqueID;
 	}
-	Account(Client* client, int ID) {
+	Account(Client* client) {
 		this->client = client;
-		this->ID = ID;
+		this->ID = nextUniqueID;
+		++nextUniqueID;
 		this->balance = 0;
 	}
 	Account(Client* client, double balance) {
 		this->client = client;
 		this->balance = balance;
-		this->ID = -1;
+		this->ID = nextUniqueID;
+		++nextUniqueID;
 	}
-	Account(Client* client, int ID, double Money) {
+	Account(Client* client, double Money) {
 		this->client = client;
-		this->ID = ID;
+		this->ID = nextUniqueID;
+		++nextUniqueID;
 		this->balance = Money;
 	}
 
