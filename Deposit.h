@@ -8,6 +8,7 @@ using namespace std;
 
 class Deposit : public BankService {
 	friend class Client;
+
 public:
 	Deposit() : BankService() {};
 	Deposit(int years) : BankService(years) {};

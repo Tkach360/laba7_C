@@ -51,5 +51,4 @@ public:
 	}
 
 	virtual void showInConsole() {};
-
 };
