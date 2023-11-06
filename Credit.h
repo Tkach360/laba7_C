@@ -51,18 +51,7 @@ public:
 			" percent: " + to_string(this->percent) + " contribution: " + to_string(this->contrib);
 		cout << Info << endl;
 	}
-	bool checkThisCredit() {
-		if (!(this->years > 0 && this->body > this->contrib && this->percent > 1)) return false;
-		if (this->body * (this->percent - 1) >= this->contrib) return false;
 
-		int TrueYears = 0;
-		double body = this->body;
-		for (TrueYears; body > 0; TrueYears++)
-			body -= body * this->percent;
-		if (TrueYears != this->years) return false;
-
-		return true;
-	}
 	static bool checkCredit(Credit credit) {
 		if (!(credit.getYears() > 0 && credit.getBody() > credit.getContrib() && credit.getPercent() > 1)) return false;
 		if (credit.getBody() * (credit.getPercent() - 1) >= credit.getContrib()) return false;
