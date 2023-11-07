@@ -46,8 +46,8 @@ int main() {
 	(*cli_d).addNewCredit(5, 1.05, 10000, 1000);
 
 	cout << "\n" << ++test << ") Test of a dynamic array of class objects " << endl; //10
-	Client* cli_arr = new Client[3] { string("Grigory"), string("Victor"), string("Gennadiy") };
-	for (int i = 0; i < 3; i++) 
+	Client* cli_arr = new Client[3]{ string("Grigory"), string("Victor"), string("Gennadiy") };
+	for (int i = 0; i < 3; i++)
 		cout << cli_arr[i].getName() << endl;
 
 	delete[] cli_arr;
