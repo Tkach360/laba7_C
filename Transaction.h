@@ -40,21 +40,24 @@ public:
 		return Time;
 	}
 
-	void showInConsole() {
-		string strTime = to_string(Time.tm_mday) + "." + to_string(Time.tm_mon + 1) + "."
-			+ to_string(Time.tm_year + 1900) + " " + to_string(Time.tm_hour) + ":" + to_string(Time.tm_min);
+	friend ostream& operator << (ostream& output, Transaction& transaction) {
+		string strTime = to_string(transaction.Time.tm_mday) + "." + to_string(transaction.Time.tm_mon + 1) + "."
+			+ to_string(transaction.Time.tm_year + 1900) + " " + to_string(transaction.Time.tm_hour) + ":" + to_string(transaction.Time.tm_min);
 		string strMoney, strAlterClientName, strAlterAccountID;
 
-		if (this->sent) {
-			strMoney = "-" + to_string(this->money);
-			strAlterClientName = "to " + this->alterClientName;
+		if (transaction.sent) {
+			strMoney = "-" + to_string(transaction.money);
+			strAlterClientName = "to " + transaction.alterClientName;
 		}
 		else {
-			strMoney = "+" + to_string(money);
-			strAlterClientName = "from " + this->alterClientName;
+			strMoney = "+" + to_string(transaction.money);
+			strAlterClientName = "from " + transaction.alterClientName;
 		}
 
-		strAlterAccountID = to_string(alterAccountID);
+		strAlterAccountID = to_string(transaction.alterAccountID);
 		cout << "Time: " + strTime + " " + strMoney + " " + strAlterClientName + " acc. " + strAlterAccountID << endl;
+
+		return output;
 	}
+
 };

@@ -63,7 +63,7 @@ public:
 	void showAllTransactionInConsole() {
 		cout << "All transaction:" << endl;
 		for (Transaction transaction : Transactions)
-			transaction.showInConsole();
+			cout << transaction << endl;
 	}
 
 	vector<Transaction> getAllTransactions() {
