@@ -75,11 +75,19 @@ int main() {
 	cli.addNewAccount(20000);
 	cout << "new Account ID: " << cli.Accounts.back().getID() << endl;
 
+	cout << "\n" << ++test << ") Test for returning a value by reference (Client::getAllAccounts())";
+	// демонстрация возврата значения через ссылку
+	vector<Account> cli_accounts = cli.getAllAccounts();
+	cli_accounts[0].showAllTransactionInConsole();
 
-	cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
-	Client cli_c;
-	cin >> cli_c;
-	cout << cli_c << endl;
+	cout << "\n" << ++test << ") Test for returning a value via a pointer (Client::getAccountByID())" << endl;
+	Account* cli_acc = cli.getAccountByID(0);
+
+
+	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
+	//Client cli_c;
+	//cin >> cli_c;
+	//cout << cli_c << endl;
 
 	//cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
 	//cli_c.inputNewAccountFromConsole();

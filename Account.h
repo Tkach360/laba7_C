@@ -61,7 +61,7 @@ public:
 	friend ostream& operator << (ostream& output, const Account& account);
 
 	void showAllTransactionInConsole() {
-		cout << "All transaction:" << endl;
+		cout << "\nAll transaction:" << endl;
 		for (Transaction transaction : Transactions)
 			cout << transaction << endl;
 	}

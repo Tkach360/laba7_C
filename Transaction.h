@@ -55,7 +55,7 @@ public:
 		}
 
 		strAlterAccountID = to_string(transaction.alterAccountID);
-		cout << "Time: " + strTime + " " + strMoney + " " + strAlterClientName + " acc. " + strAlterAccountID << endl;
+		cout << "Time: " + strTime + " " + strMoney + " " + strAlterClientName + " acc. " + strAlterAccountID;
 
 		return output;
 	}

@@ -57,6 +57,15 @@ public:
 		return this->age;
 	}
 
+	// методы возврата значений через указатели
+	Account* getAccountByID(int searchID) {
+		for (int i = 0; i < Accounts.size(); i++) {
+			if (Accounts[i].getID() == searchID)
+				return &Accounts[i];
+		}
+		return nullptr;
+	}
+
 	void setPhoneNumber(string phoneNumber) {
 		this->phoneNumber = phoneNumber;
 	}
@@ -152,15 +161,19 @@ public:
 			AllTransactions.insert(AllTransactions.end(), account.Transactions.begin(), account.Transactions.end());
 		return AllTransactions;
 	}
-	vector<Account> getAllAccounts() {
+
+	// методы возврата значений через ссылки
+	vector<Account>& getAllAccounts() {
 		return this->Accounts;
 	}
-	vector<Deposit> getAllDeposits() {
+	vector<Deposit>& getAllDeposits() {
 		return this->Deposits;
 	}
-	vector<Credit> getAllCredits() {
+	vector<Credit>& getAllCredits() {
 		return this->Credits;
 	}
+
+
 };
 
 string Account::getClientName() {
