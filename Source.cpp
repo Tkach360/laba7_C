@@ -14,7 +14,7 @@ int main() {
 
 	cout << "\n" << ++test << ") Test addAccount" << endl; //2
 	cli.addNewAccount(10000);
-	cli.Accounts[0].showInConsole();
+	cout << cli.Accounts[0] << endl;
 
 	cli.addNewAccount(10000);
 	cout << "\n" << ++test << ") Test makeTransaction" << endl; //3

@@ -58,7 +58,7 @@ public:
 	}
 	void inputNewTransactionFromConsole(Account* alterAccount);
 
-	void showInConsole();
+	friend ostream& operator << (ostream& output, const Account& account);
 
 	void showAllTransactionInConsole() {
 		cout << "All transaction:" << endl;

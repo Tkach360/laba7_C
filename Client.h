@@ -184,8 +184,10 @@ void Account::inputNewTransactionFromConsole(Account* AlterAccount) {
 	cout << "Operation was successfully completed" << endl;
 }
 
-void Account::showInConsole() {
-	string Info = "Client: " + this->client->getName() + " num: " + to_string(this->ID) +
-		" balance: " + to_string(this->balance);
+ostream& operator << (ostream& output, const Account& account) {
+	string Info = "Client: " + account.client->getName() + " num: " + to_string(account.ID) +
+		" balance: " + to_string(account.balance);
 	cout << Info << endl;
+
+	return output;
 }
