@@ -10,7 +10,7 @@ int main() {
 
 	Client cli("Igor", 23, "234234");
 	cout << "\n" << ++test << ") Test constructor with all parameters" << endl; //1
-	cli.showInConsole();
+	cout << cli << endl;
 
 	cout << "\n" << ++test << ") Test addAccount" << endl; //2
 	cli.addNewAccount(10000);
@@ -41,7 +41,7 @@ int main() {
 
 	cout << "\n" << ++test << ") Test dynamic" << endl; //9
 	Client* cli_d = &cli;
-	cli_d->showInConsole();
+	cout << *cli_d << endl;
 	cli_d->Accounts[0].makeTransaction(&cli.Accounts[1], 100);
 	(*cli_d).addNewCredit(5, 1.05, 10000, 1000);
 
@@ -79,7 +79,7 @@ int main() {
 	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
 	//Client cli_c;
 	//cli_c.inputClientFromConsole();
-	//cli_c.showInConsole();
+	//cout << cli_c << endl;
 
 	//cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
 	//cli_c.inputNewAccountFromConsole();

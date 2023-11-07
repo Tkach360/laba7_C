@@ -10,6 +10,7 @@
 using namespace std;
 
 class Client {
+
 private:
 	int age;
 	string name;
@@ -51,7 +52,7 @@ public:
 		return this->age;
 	}
 
-	void setPhoeNumber(string phoneNumber) {
+	void setPhoneNumber(string phoneNumber) {
 		this->phoneNumber = phoneNumber;
 	}
 	void setAge(int age) {
@@ -134,12 +135,16 @@ public:
 			AllTransactions.insert(AllTransactions.end(), account.Transactions.begin(), account.Transactions.end());
 		return AllTransactions;
 	}
-	void showInConsole() {
-		cout << "Name: " + this->name + " age: " + to_string(this->age) + " Phone number: " +
-			this->phoneNumber << endl;
-		cout << "  Accounts: " + to_string(this->Accounts.size()) + " Credits: " +
-			to_string(this->Credits.size()) + " Deposits: " + to_string(this->Deposits.size()) << endl;
+
+	friend ostream& operator << (ostream& output, const Client& client) {
+		output << "Name: " + client.name + " age: " + to_string(client.age) + " Phone number: " +
+			client.phoneNumber << endl;
+		output << "  Accounts: " + to_string(client.Accounts.size()) + " Credits: " +
+			to_string(client.Credits.size()) + " Deposits: " + to_string(client.Deposits.size()) << endl;
+
+		return output;
 	}
+
 	vector<Account> getAllAccounts() {
 		return this->Accounts;
 	}
