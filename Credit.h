@@ -49,10 +49,13 @@ public:
 		}
 		return FinalContributionsPayments;
 	}
-	void showInConsole() {
-		string Info = "Credit year: " + to_string(this->years) + " body: " + to_string(this->body) +
-			" percent: " + to_string(this->percent) + " contribution: " + to_string(this->contrib);
+
+	friend ostream& operator << (ostream& output, Credit& credit) {
+		string Info = "Credit year: " + to_string(credit.years) + " body: " + to_string(credit.body) +
+			" percent: " + to_string(credit.percent) + " contribution: " + to_string(credit.contrib);
 		cout << Info << endl;
+
+		return output;
 	}
 
 	static void setMaxCreditAmout(int newAmout) {
