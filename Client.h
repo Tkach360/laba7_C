@@ -73,7 +73,7 @@ public:
 	}
 
 	void addNewAccount(double money) {
-		Account newAccount(this, Accounts.size(), money);
+		Account newAccount(this, money);
 		this->Accounts.push_back(newAccount);
 	}
 	void inputNewAccountFromConsole() {

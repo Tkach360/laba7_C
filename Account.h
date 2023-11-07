@@ -31,23 +31,11 @@ public:
 		this->ID = nextUniqueID;
 		++nextUniqueID;
 	}
-	Account(Client* client) {
-		this->client = client;
-		this->ID = nextUniqueID;
-		++nextUniqueID;
-		this->balance = 0;
-	}
 	Account(Client* client, double balance) {
 		this->client = client;
 		this->balance = balance;
 		this->ID = nextUniqueID;
 		++nextUniqueID;
-	}
-	Account(Client* client, double Money) {
-		this->client = client;
-		this->ID = nextUniqueID;
-		++nextUniqueID;
-		this->balance = Money;
 	}
 
 	int getID() {
@@ -82,3 +70,5 @@ public:
 		return this->Transactions;
 	}
 };
+
+int Account::nextUniqueID = 0;
