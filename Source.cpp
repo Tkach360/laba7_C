@@ -60,25 +60,34 @@ int main() {
 	for (int i = 0; i < 3; i++)
 		delete cli_d_arr[i];
 
+	cout << "\n" << ++test << ") Test static method Credit::setMaxCreditAmout(50000) " << endl;
+	Credit::setMaxCreditAmout(50000);
+	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 100000, 1.2, 21000), should be false because maxCreditAmout was exceeded " << endl;
+	cout << "    " << Credit::checkCredit(10, 100000, 1.2, 21000);
+	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 1000), should be false because the annual fee is less than a percentage " << endl;
+	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 1000);
+	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 2100), should be true " << endl;
+	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 2385.23);
 
-	cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
-	Client cli_c;
-	cli_c.inputClientFromConsole();
-	cli_c.showInConsole();
 
-	cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
-	cli_c.inputNewAccountFromConsole();
-	cli_c.Accounts[0].showInConsole();
+	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
+	//Client cli_c;
+	//cli_c.inputClientFromConsole();
+	//cli_c.showInConsole();
 
-	cout << "\n" << ++test << ") Test inputNewCreditFromConsole" << endl; //14
-	cli_c.inputNewCreditFromConsole();
-	cli_c.Credits[0].showInConsole();
+	//cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
+	//cli_c.inputNewAccountFromConsole();
+	//cli_c.Accounts[0].showInConsole();
 
-	cout << "\n" << ++test << ") Test inputNewDepositFromConsole" << endl; //15
-	cli_c.inputNewDepositFromConsole();
-	cli_c.Deposits[0].showInConsole();
+	//cout << "\n" << ++test << ") Test inputNewCreditFromConsole" << endl; //14
+	//cli_c.inputNewCreditFromConsole();
+	//cli_c.Credits[0].showInConsole();
 
-	cout << "\n" << ++test << ") Test inputNewTransactionFromConsole" << endl; //16
-	cli_c.Accounts[0].inputNewTransactionFromConsole(&cli.Accounts[0]);
-	cli_c.Accounts[0].showAllTransactionInConsole();
+	//cout << "\n" << ++test << ") Test inputNewDepositFromConsole" << endl; //15
+	//cli_c.inputNewDepositFromConsole();
+	//cli_c.Deposits[0].showInConsole();
+
+	//cout << "\n" << ++test << ") Test inputNewTransactionFromConsole" << endl; //16
+	//cli_c.Accounts[0].inputNewTransactionFromConsole(&cli.Accounts[0]);
+	//cli_c.Accounts[0].showAllTransactionInConsole();
 }

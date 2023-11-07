@@ -62,28 +62,32 @@ public:
 	// статический метод проверки кредита через Credit
 	static bool checkCredit(Credit credit) {
 		if (!(credit.getYears() > 0 && credit.getBody() > credit.getContrib() && credit.getPercent() > 1)) return false;
-		if (credit.getBody() * (credit.getPercent() - 1) >= credit.getContrib()) return false;
+		if (credit.getBody() * (credit.getPercent() - 1) > credit.getContrib()) return false;
 		if (credit.getBody() > maxCreditAmout) return false;
 
 		int TrueYears = 0;
 		double body = credit.getBody();
-		for (TrueYears; body > 0; TrueYears++)
-			body -= body * credit.getPercent();
+		for (TrueYears; body > 0; TrueYears++) {
+			body = body * credit.getPercent();
+			body -= credit.getContrib();
+		}
 		if (TrueYears != credit.getYears()) return false;
 
 		return true;
 	}  
 
 	// статический метод проверки кредита через параметры
-	static bool checkCredit(int years, double body, double percent, double contribution) {
+	static int checkCredit(int years, double body, double percent, double contribution) {
 		if (!(years > 0 && body > contribution && percent > 1)) return false;
-		if (body * (percent - 1) >= contribution) return false;
+		if (body * (percent - 1.0) > contribution) return false;
 		if (body > maxCreditAmout) return false;
 
 		int TrueYears = 0;
 		double body_credit = body;
-		for (TrueYears; body_credit > 0; TrueYears++)
-			body_credit -= body_credit * percent;
+		for (TrueYears; body_credit > 0; TrueYears++) {
+			body_credit = body_credit * percent;
+			body_credit -= contribution;
+		}
 		if (TrueYears != years) return false;
 
 		return true;
