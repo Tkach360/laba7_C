@@ -50,9 +50,6 @@ public:
 	int getAge() {
 		return this->age;
 	}
-	Account getAccountByID(int ID) {
-		return Accounts[ID];
-	}
 
 	void setPhoeNumber(string phoneNumber) {
 		this->phoneNumber = phoneNumber;

@@ -66,8 +66,14 @@ int main() {
 	cout << "    " << Credit::checkCredit(10, 100000, 1.2, 21000);
 	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 1000), should be false because the annual fee is less than a percentage " << endl;
 	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 1000);
-	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 2100), should be true " << endl;
+	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 2385.23), should be true " << endl;
 	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 2385.23);
+
+	cout << "\n" << ++test << ") Test static field Account::nextUniqueID " << endl;
+	cli.addNewAccount(20000);
+	cout << "new Account ID: " << cli.Accounts.back().getID() << endl;
+	cli.addNewAccount(20000);
+	cout << "new Account ID: " << cli.Accounts.back().getID() << endl;
 
 
 	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
