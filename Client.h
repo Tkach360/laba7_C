@@ -11,6 +11,11 @@ using namespace std;
 
 class Client {
 
+	//дружественные функции
+	friend void BankService::setYear(int newYear);
+	friend void BankService::setBody(double newBody);
+	friend void BankService::setPercent(double newPercent);
+
 private:
 	int age;
 	string name;

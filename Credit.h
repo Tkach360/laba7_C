@@ -7,8 +7,6 @@
 using namespace std;
 
 class Credit : public BankService {
-	friend class Client;
-
 private:
 	static double maxCreditAmout; // максимально возможная сумма кредита
 

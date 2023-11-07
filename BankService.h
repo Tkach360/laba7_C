@@ -1,8 +1,9 @@
 #pragma once
-
+#include "Client.h"
 
 class BankService {
 	friend class Client;
+
 protected:
 	int years;
 	double percent; // в формате 1.XX..
@@ -28,7 +29,6 @@ protected:
 		this->percent = percent;
 		this->body = body;
 	}
-public:
 
 	void setYear(int newYear) {
 		this->years = newYear;
@@ -40,6 +40,7 @@ public:
 		this->percent = newPercent;
 	}
 
+public:
 	int getYears() {
 		return this->years;
 	}
