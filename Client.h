@@ -62,12 +62,14 @@ public:
 		this->name = name;
 	}
 
-	void inputClientFromConsole() {
-		this->name = inputClientName("Enter the name of the new client (First name Last name): ");
-		this->age = inputInt("Enter the age of the new client: ");
-		this->phoneNumber = inputClientPhoneNumber("Enter the phone number of the new client (X-XXX-XXX-XX-XX): ");
+	friend istream& operator >> (istream& input, Client& client) {
+		client.name = inputClientName("Enter the name of the new client (First name Last name): ");
+		client.age = inputInt("Enter the age of the new client: ");
+		client.phoneNumber = inputClientPhoneNumber("Enter the phone number of the new client (X-XXX-XXX-XX-XX): ");
 
 		cout << "Client successfully registered" << endl;
+
+		return input;
 	}
 
 	void addNewAccount(double money) {
@@ -129,12 +131,6 @@ public:
 		}
 		return AllAccountsMoney;
 	}
-	vector<Transaction> getAllTransactions() {
-		vector<Transaction> AllTransactions;
-		for (Account account : Accounts)
-			AllTransactions.insert(AllTransactions.end(), account.Transactions.begin(), account.Transactions.end());
-		return AllTransactions;
-	}
 
 	friend ostream& operator << (ostream& output, const Client& client) {
 		output << "Name: " + client.name + " age: " + to_string(client.age) + " Phone number: " +
@@ -145,6 +141,12 @@ public:
 		return output;
 	}
 
+	vector<Transaction> getAllTransactions() {
+		vector<Transaction> AllTransactions;
+		for (Account account : Accounts)
+			AllTransactions.insert(AllTransactions.end(), account.Transactions.begin(), account.Transactions.end());
+		return AllTransactions;
+	}
 	vector<Account> getAllAccounts() {
 		return this->Accounts;
 	}

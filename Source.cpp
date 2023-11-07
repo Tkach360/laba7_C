@@ -76,10 +76,10 @@ int main() {
 	cout << "new Account ID: " << cli.Accounts.back().getID() << endl;
 
 
-	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
-	//Client cli_c;
-	//cli_c.inputClientFromConsole();
-	//cout << cli_c << endl;
+	cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
+	Client cli_c;
+	cin >> cli_c;
+	cout << cli_c << endl;
 
 	//cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
 	//cli_c.inputNewAccountFromConsole();
