@@ -24,7 +24,7 @@ int main() {
 
 	cout << "\n" << ++test << ") Test addDeposit" << endl; //4
 	cli.addNewDeposit(10, 1.08, 100000);
-	cli.Deposits[0].showInConsole();
+	cout << cli.Deposits[0] << endl;
 
 	cout << "\n" << ++test << ") Test addCredit" << endl; //5
 	cli.addNewCredit(10, 1.08, 100000, 9000);
@@ -91,7 +91,7 @@ int main() {
 
 	//cout << "\n" << ++test << ") Test inputNewDepositFromConsole" << endl; //15
 	//cli_c.inputNewDepositFromConsole();
-	//cli_c.Deposits[0].showInConsole();
+	//cout << cli_c.Deposits[0] << endl;
 
 	//cout << "\n" << ++test << ") Test inputNewTransactionFromConsole" << endl; //16
 	//cli_c.Accounts[0].inputNewTransactionFromConsole(&cli.Accounts[0]);

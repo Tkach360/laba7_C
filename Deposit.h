@@ -23,9 +23,12 @@ public:
 		}
 		return FinalDepositAmount;
 	}
-	void showInConsole() {
-		string Info = "Deposit year: " + to_string(this->years) + " body: " + to_string(this->body) +
-			" percent: " + to_string(this->percent);
+
+	friend ostream& operator << (ostream& output, Deposit& deposit) {
+		string Info = "Deposit year: " + to_string(deposit.years) + " body: " + to_string(deposit.body) +
+			" percent: " + to_string(deposit.percent);
 		cout << Info << endl;
+
+		return output;
 	}
 };
