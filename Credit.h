@@ -78,6 +78,13 @@ public:
 		return *this;
 	}
 
+	// перегрузка оператора ++ (постфиксна€ форма)
+	Credit& operator ++ (int) {
+		Credit temp = *this;
+		++(*this);
+		return temp;
+	}
+
 	// статическа€ функци€ расчета регул€рных выплат по кредиту
 	static double getRegularContribution(int years, double body, double percent) {
 

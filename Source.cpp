@@ -92,6 +92,16 @@ int main() {
 	Credit first(10, 1.2, 10000, 2385.23);
 	cout << first + first << endl;
 
+	cout << "\n" << ++test << ") Test operator overload test ++ (prefix form) for Credit" << endl;
+	Credit first(10, 1.2, 10000, 2385.23);
+	++first;
+	cout << first << endl;
+
+	cout << "\n" << ++test << ") Test operator overload test ++ (postfix form) for Credit" << endl;
+	Credit first(10, 1.2, 10000, 2385.23);
+	first++;
+	cout << first << endl;
+
 
 	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
 	//Client cli_c;
