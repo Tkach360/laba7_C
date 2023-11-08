@@ -92,35 +92,36 @@ int main() {
 	Credit first(10, 1.2, 10000, 2385.23);
 	cout << first + first << endl;
 
+	// демонстраци€ оператора ++ (префиксна€ форма) дл€ Credit
 	cout << "\n" << ++test << ") Test operator overload test ++ (prefix form) for Credit" << endl;
 	Credit first(10, 1.2, 10000, 2385.23);
 	++first;
 	cout << first << endl;
 
+	// демонстраци€ оператора ++ (постфиксна€ форма) дл€ Credit
 	cout << "\n" << ++test << ") Test operator overload test ++ (postfix form) for Credit" << endl;
 	Credit first(10, 1.2, 10000, 2385.23);
 	first++;
 	cout << first << endl;
 
+	cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
+	Client cli_c;
+	cin >> cli_c;
+	cout << cli_c << endl;
 
-	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
-	//Client cli_c;
-	//cin >> cli_c;
-	//cout << cli_c << endl;
+	cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
+	cli_c.inputNewAccountFromConsole();
+	cout << cli_c.Accounts[0] << endl;
 
-	//cout << "\n" << ++test << ") Test inputNewAccountFromConsole" << endl; //13
-	//cli_c.inputNewAccountFromConsole();
-	//cout << cli_c.Accounts[0] << endl;
+	cout << "\n" << ++test << ") Test inputNewCreditFromConsole" << endl; //14
+	cli_c.inputNewCreditFromConsole();
+	cout << cli_c.Credits[0] << endl;
 
-	//cout << "\n" << ++test << ") Test inputNewCreditFromConsole" << endl; //14
-	//cli_c.inputNewCreditFromConsole();
-	//cout << cli_c.Credits[0] << endl;
+	cout << "\n" << ++test << ") Test inputNewDepositFromConsole" << endl; //15
+	cli_c.inputNewDepositFromConsole();
+	cout << cli_c.Deposits[0] << endl;
 
-	//cout << "\n" << ++test << ") Test inputNewDepositFromConsole" << endl; //15
-	//cli_c.inputNewDepositFromConsole();
-	//cout << cli_c.Deposits[0] << endl;
-
-	//cout << "\n" << ++test << ") Test inputNewTransactionFromConsole" << endl; //16
-	//cli_c.Accounts[0].inputNewTransactionFromConsole(&cli.Accounts[0]);
-	//cli_c.Accounts[0].showAllTransactionInConsole();
+	cout << "\n" << ++test << ") Test inputNewTransactionFromConsole" << endl; //16
+	cli_c.Accounts[0].inputNewTransactionFromConsole(&cli.Accounts[0]);
+	cli_c.Accounts[0].showAllTransactionInConsole();
 }

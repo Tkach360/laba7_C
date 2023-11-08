@@ -11,7 +11,7 @@ using namespace std;
 
 class Client {
 
-	//дружественные функции
+	//разумное использование дружественных функции
 	friend void BankService::setYear(int newYear);
 	friend void BankService::setBody(double newBody);
 	friend void BankService::setPercent(double newPercent);
@@ -88,6 +88,7 @@ public:
 		return input;
 	}
 
+	// разумное использование оператора this
 	void addNewAccount(double money) {
 		Account newAccount(this, money);
 		this->Accounts.push_back(newAccount);
