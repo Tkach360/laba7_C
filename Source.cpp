@@ -68,8 +68,9 @@ int main() {
 	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 1000);
 	cout << "\n" << ++test << ") Test static method Credit::getRegularContribution(10, 10000, 1.2), should be 2385.23 " << endl;
 	cout << "    " << Credit::getRegularContribution(10, 10000, 1.2);
+	cout << "    " << Credit::getRegularContribution(20, 20000, 1.2);
 	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 2385.23), should be true " << endl;
-	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 2385.23);
+	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 2385.23) << endl;
 
 	cout << "\n" << ++test << ") Test static field Account::nextUniqueID " << endl;
 	cli.addNewAccount(20000);
@@ -85,6 +86,11 @@ int main() {
 	//демонстрация возврата значения через указатель
 	cout << "\n" << ++test << ") Test for returning a value via a pointer (Client::getAccountByID())" << endl;
 	Account* cli_acc = cli.getAccountByID(0);
+
+	// демонстрация оператора + для Credit
+	cout << "\n" << ++test << ") Test operator overload test + for Credit" << endl;
+	Credit first(10, 1.2, 10000, 2385.23);
+	cout << first + first << endl;
 
 
 	//cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12

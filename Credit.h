@@ -34,7 +34,8 @@ public:
 		double body = getBody();
 		double percent = getPercent();
 		double contribution = getContrib();
-		for (int i = 0; i < years; i++) {
+
+		for (int i = 0; i < years + 1; i++) {
 			if (body < contribution) {
 				FinalContributionsPayments += body;
 				body = 0;
@@ -48,8 +49,6 @@ public:
 		return FinalContributionsPayments;
 	}
 
-
-
 	friend ostream& operator << (ostream& output, Credit& credit) {
 		string Info = "Credit year: " + to_string(credit.years) + " body: " + to_string(credit.body) +
 			" percent: " + to_string(credit.percent) + " contribution: " + to_string(credit.contrib);
@@ -58,7 +57,19 @@ public:
 		return output;
 	}
 
-	// статическа€ функци€ расчета регулрных выплат по кредиту
+	// перегрузка оператора + дл€ Credit
+	friend Credit& operator + (Credit& firstCredit, Credit& secondCredit) {
+		double newBody = firstCredit.getBody() + secondCredit.getBody();
+		int newYears = firstCredit.getYears() + secondCredit.getYears();
+
+		double newPercent = firstCredit.getPercent() * (firstCredit.getBody() / newBody) + secondCredit.getPercent() * (secondCredit.getBody() / newBody);
+		double newContrib = getRegularContribution(newYears, newBody, newPercent);
+
+		Credit newCredit(newYears, newPercent, newBody, newContrib);
+		return newCredit;
+	}
+
+	// статическа€ функци€ расчета регул€рных выплат по кредиту
 	static double getRegularContribution(int years, double body, double percent) {
 
 		double clean_percent = percent - 1.0;
