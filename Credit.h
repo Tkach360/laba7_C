@@ -116,7 +116,7 @@ public:
 	}  
 
 	// статический метод проверки кредита через параметры
-	static int checkCredit(int years, double body, double percent, double contribution) {
+	static bool checkCredit(int years, double body, double percent, double contribution) {
 		if (!(years > 0 && body > contribution && percent > 1)) return false;
 		if (body * (percent - 1.0) > contribution) return false;
 		if (body > maxCreditAmout) return false;
