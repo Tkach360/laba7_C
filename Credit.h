@@ -7,10 +7,16 @@
 using namespace std;
 
 class Credit : public BankService {
+	friend class Client;
+
 private:
 	static double maxCreditAmout; // максимально возможна€ сумма кредита
 
 	double contrib;
+	void setContrib(double newContrib) {
+		contrib = newContrib;
+	}
+
 
 public:
 	Credit() : BankService() {};
@@ -18,10 +24,6 @@ public:
 	Credit(double body) : BankService(body) {};
 	Credit(int years, double percent, double body, double contrib) : BankService(years, percent, body) {
 		this->contrib = contrib;
-	}
-
-	void setContrib(double newContrib) {
-		contrib = newContrib;
 	}
 
 	double getContrib() {
@@ -67,6 +69,13 @@ public:
 
 		Credit newCredit(newYears, newPercent, newBody, newContrib);
 		return newCredit;
+	}
+
+	// перегрузка оператора ++ (префиксна€ форма)
+	Credit& operator ++ () {
+		this->years += 1;
+		this->contrib = getRegularContribution(this->years, this->body, this->percent);
+		return *this;
 	}
 
 	// статическа€ функци€ расчета регул€рных выплат по кредиту

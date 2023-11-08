@@ -16,6 +16,8 @@ class Client {
 	friend void BankService::setBody(double newBody);
 	friend void BankService::setPercent(double newPercent);
 
+	friend void Credit::setContrib(double newContrib);
+
 private:
 	int age;
 	string name;
