@@ -66,6 +66,8 @@ int main() {
 	cout << "    " << Credit::checkCredit(10, 100000, 1.2, 21000);
 	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 1000), should be false because the annual fee is less than a percentage " << endl;
 	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 1000);
+	cout << "\n" << ++test << ") Test static method Credit::getRegularContribution(10, 10000, 1.2), should be 2385.23 " << endl;
+	cout << "    " << Credit::getRegularContribution(10, 10000, 1.2);
 	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 2385.23), should be true " << endl;
 	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 2385.23);
 
@@ -75,11 +77,12 @@ int main() {
 	cli.addNewAccount(20000);
 	cout << "new Account ID: " << cli.Accounts.back().getID() << endl;
 
-	cout << "\n" << ++test << ") Test for returning a value by reference (Client::getAllAccounts())";
 	// демонстрация возврата значения через ссылку
+	cout << "\n" << ++test << ") Test for returning a value by reference (Client::getAllAccounts())";
 	vector<Account> cli_accounts = cli.getAllAccounts();
 	cli_accounts[0].showAllTransactionInConsole();
 
+	//демонстрация возврата значения через указатель
 	cout << "\n" << ++test << ") Test for returning a value via a pointer (Client::getAccountByID())" << endl;
 	Account* cli_acc = cli.getAccountByID(0);
 

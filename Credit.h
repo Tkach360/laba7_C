@@ -48,12 +48,23 @@ public:
 		return FinalContributionsPayments;
 	}
 
+
+
 	friend ostream& operator << (ostream& output, Credit& credit) {
 		string Info = "Credit year: " + to_string(credit.years) + " body: " + to_string(credit.body) +
 			" percent: " + to_string(credit.percent) + " contribution: " + to_string(credit.contrib);
 		cout << Info << endl;
 
 		return output;
+	}
+
+	// статическая функция расчета регулрных выплат по кредиту
+	static double getRegularContribution(int years, double body, double percent) {
+
+		double clean_percent = percent - 1.0;
+
+		double contrib = body * (clean_percent + (clean_percent / (pow(clean_percent + 1.0, (double) years) - 1)));
+		return contrib;
 	}
 
 	static void setMaxCreditAmout(int newAmout) {
