@@ -97,6 +97,9 @@ public:
 	static void setMaxCreditAmout(int newAmout) {
 		maxCreditAmout = newAmout;
 	}
+	static double getMaxCreditAmout() {
+		return maxCreditAmout;
+	}
 
 	// статический метод проверки кредита через Credit
 	static bool checkCredit(Credit credit) {

@@ -78,6 +78,14 @@ public:
 		this->name = name;
 	}
 
+	friend ostream& operator << (ostream& output, const Client& client) {
+		output << "Name: " + client.name + " age: " + to_string(client.age) + " Phone number: " +
+			client.phoneNumber << endl;
+		output << "  Accounts: " + to_string(client.Accounts.size()) + " Credits: " +
+			to_string(client.Credits.size()) + " Deposits: " + to_string(client.Deposits.size()) << endl;
+
+		return output;
+	}
 	friend istream& operator >> (istream& input, Client& client) {
 		client.name = inputClientName("Enter the name of the new client (First name Last name): ");
 		client.age = inputInt("Enter the age of the new client: ");
@@ -149,14 +157,6 @@ public:
 		return AllAccountsMoney;
 	}
 
-	friend ostream& operator << (ostream& output, const Client& client) {
-		output << "Name: " + client.name + " age: " + to_string(client.age) + " Phone number: " +
-			client.phoneNumber << endl;
-		output << "  Accounts: " + to_string(client.Accounts.size()) + " Credits: " +
-			to_string(client.Credits.size()) + " Deposits: " + to_string(client.Deposits.size()) << endl;
-
-		return output;
-	}
 
 	vector<Transaction> getAllTransactions() {
 		vector<Transaction> AllTransactions;
