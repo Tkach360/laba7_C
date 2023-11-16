@@ -26,33 +26,36 @@ int main() {
 	cli.addNewDeposit(10, 1.08, 100000);
 	cout << cli.Deposits[0] << endl;
 
-	cout << "\n" << ++test << ") Test addCredit" << endl; //5
+	cout << "\n" << ++test << ") Test addNewCredit" << endl; //5
 	cli.addNewCredit(10, 1.08, 100000, 9000);
 	cout << cli.Credits[0] << endl;
 
-	cout << "\n" << ++test << ") Test showAllTransactionsInConsole" << endl; //6
+	cout << "\n" << ++test << ") Exception handling test" << endl; //6
+	cli.addNewCredit(10, 1.08, 100000, 7000);
+
+	cout << "\n" << ++test << ") Test showAllTransactionsInConsole" << endl; //7
 	cli.Accounts[0].showAllTransactionInConsole();
 
-	cout << "\n" << ++test << ") Test getFinalContributionsPayments" << endl; //7
+	cout << "\n" << ++test << ") Test getFinalContributionsPayments" << endl; //8
 	cout << "Final contrib pay: " << cli.Credits[0].getFinalContributionsPayments() << endl;
 
-	cout << "\n" << ++test << ") Test getFinalDepositAmount" << endl; //8
+	cout << "\n" << ++test << ") Test getFinalDepositAmount" << endl; //9
 	cout << "Final deposit amount: " << cli.Deposits[0].getFinalDepositAmount() << endl;
 
-	cout << "\n" << ++test << ") Test dynamic" << endl; //9
+	cout << "\n" << ++test << ") Test dynamic" << endl; //10
 	Client* cli_d = &cli;
 	cout << *cli_d << endl;
 	cli_d->Accounts[0].makeTransaction(&cli.Accounts[1], 100);
 	(*cli_d).addNewCredit(5, 1.05, 10000, 1000);
 
-	cout << "\n" << ++test << ") Test of a dynamic array of class objects " << endl; //10
+	cout << "\n" << ++test << ") Test of a dynamic array of class objects " << endl; //11
 	Client* cli_arr = new Client[3]{ string("Grigory"), string("Victor"), string("Gennadiy") };
 	for (int i = 0; i < 3; i++)
 		cout << cli_arr[i].getName() << endl;
 
 	delete[] cli_arr;
 
-	cout << "\n" << ++test << ") Test of an array of dynamic class objects " << endl; //11
+	cout << "\n" << ++test << ") Test of an array of dynamic class objects " << endl; //12
 	Client* cli_d_arr[3]{ new Client("Guts"), new Client("Griffits"), new Client("Stepan") };
 	for (int i = 0; i < 3; i++)
 		cout << cli_d_arr[i]->getName() << endl;
