@@ -119,23 +119,23 @@ public:
 	void addNewCredit(int Year, double Percent, double Body, double Contrib) {
 		try {
 			checkNewCredit(Year, Percent, Body, Contrib);
+			Credit newCredit(Year, Percent, Body, Contrib);
+			this->Credits.push_back(newCredit);
 		}
 		catch(const char* msg) {
 			cout << msg << endl;
 		}
-		Credit newCredit(Year, Percent, Body, Contrib);
-		this->Credits.push_back(newCredit);
 	}
 
 	// использование блоков try-catch
 	void addNewCredit(Credit newCredit) {
 		try {
 			checkNewCredit(newCredit.getYears(), newCredit.getPercent(), newCredit.getBody(), newCredit.getContrib());
+			this->Credits.push_back(newCredit);
 		}
 		catch (const char* msg) {
 			cout << msg << endl;
 		}
-		this->Credits.push_back(newCredit);
 	}
 	void inputNewCreditFromConsole() {
 		Credit newCredit;
