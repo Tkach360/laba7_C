@@ -91,6 +91,9 @@ public:
 		double clean_percent = percent - 1.0;
 
 		double contrib = body * (clean_percent + (clean_percent / (pow(clean_percent + 1.0, (double) years) - 1)));
+
+		contrib += 0.01; // для ликвидации ошибки связанной с машинным представлением числел
+
 		return contrib;
 	}
 

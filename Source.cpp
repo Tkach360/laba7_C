@@ -27,9 +27,10 @@ int main() {
 	cout << cli.Deposits[0] << endl;
 
 	cout << "\n" << ++test << ") Test addNewCredit" << endl; //5
-	cli.addNewCredit(10, 1.08, 100000, 9000);
+	cli.addNewCredit(10, 1.08, 100000, Credit::getRegularContribution(10, 100000, 1.08));
 	cout << cli.Credits[0] << endl;
 
+	// тест обработки исключений
 	cout << "\n" << ++test << ") Exception handling test" << endl; //6
 	cli.addNewCredit(10, 1.08, 100000, 7000);
 
@@ -42,11 +43,31 @@ int main() {
 	cout << "\n" << ++test << ") Test getFinalDepositAmount" << endl; //9
 	cout << "Final deposit amount: " << cli.Deposits[0].getFinalDepositAmount() << endl;
 
+
+	// демонстраци€ работы с одномерным массивом экземпл€ров класса
+	cout << "\n" << ++test << ") One-dimensional array test" << endl;
+	Client mass1_cli[3];
+	mass1_cli[0].setName("Svjatoslav");
+	mass1_cli[1].setName("Tihomir");
+	mass1_cli[2].setName("Dobrinja");
+	for (int i = 0; i < 3; i++) 
+		cout << mass1_cli[i].getName() << endl;
+
+	// демонстраци€ работы с двумерным массивом экземпл€ров класса
+	cout << "\n" << ++test << ") Two-dimensional array test" << endl;
+	Client mass2_cli[2][2];
+	for(int i=0;i<2;i++)
+		for (int j = 0; j < 2; j++) {
+			mass2_cli[i][j].setName("Client[" + to_string(i) + "][" + to_string(j) + "]");
+			cout << mass2_cli[i][j].getName() << endl;
+		}
+
+
 	cout << "\n" << ++test << ") Test dynamic" << endl; //10
 	Client* cli_d = &cli;
 	cout << *cli_d << endl;
 	cli_d->Accounts[0].makeTransaction(&cli.Accounts[1], 100);
-	(*cli_d).addNewCredit(5, 1.05, 10000, 1000);
+	(*cli_d).addNewCredit(5, 1.05, 10000, Credit::getRegularContribution(5, 10000, 1.05));
 
 	cout << "\n" << ++test << ") Test of a dynamic array of class objects " << endl; //11
 	Client* cli_arr = new Client[3]{ string("Grigory"), string("Victor"), string("Gennadiy") };
