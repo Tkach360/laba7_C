@@ -23,6 +23,13 @@ private:
 	string name;
 	string phoneNumber;
 
+	// использование блока инициализации исключения throw
+	void checkNewCredit(int Year, double Percent, double Body, double Contrib) {
+		if (!Credit::checkCredit(Year, Body, Percent, Contrib)) {
+			throw "Incorrect credit details.";
+		}
+	}
+
 public:
 	vector<Credit> Credits;
 	vector<Deposit> Deposits;
@@ -108,11 +115,26 @@ public:
 		cout << "Account created successfully" << endl;
 	}
 
+	// использование блоков try-catch
 	void addNewCredit(int Year, double Percent, double Body, double Contrib) {
+		try {
+			checkNewCredit(Year, Percent, Body, Contrib);
+		}
+		catch(const char* msg) {
+			cout << msg << endl;
+		}
 		Credit newCredit(Year, Percent, Body, Contrib);
 		this->Credits.push_back(newCredit);
 	}
+
+	// использование блоков try-catch
 	void addNewCredit(Credit newCredit) {
+		try {
+			checkNewCredit(newCredit.getYears(), newCredit.getPercent(), newCredit.getBody(), newCredit.getContrib());
+		}
+		catch (const char* msg) {
+			cout << msg << endl;
+		}
 		this->Credits.push_back(newCredit);
 	}
 	void inputNewCreditFromConsole() {

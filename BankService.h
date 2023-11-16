@@ -51,5 +51,5 @@ public:
 		return this->body;
 	}
 
-	virtual void showInConsole() {};
+	void showInConsole() {};
 };
