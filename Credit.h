@@ -102,7 +102,7 @@ public:
 	}
 
 	// статический метод проверки кредита через Credit
-	static bool checkCredit(Credit credit) {
+	static bool isValidCredit(Credit credit) {
 		if (!(credit.getYears() > 0 && credit.getBody() > credit.getContrib() && credit.getPercent() > 1)) return false;
 		if (credit.getBody() * (credit.getPercent() - 1) > credit.getContrib()) return false;
 		if (credit.getBody() > maxCreditAmout) return false;
@@ -119,7 +119,7 @@ public:
 	}  
 
 	// статический метод проверки кредита через параметры
-	static bool checkCredit(int years, double body, double percent, double contribution) {
+	static bool isValidCredit(int years, double body, double percent, double contribution) {
 		if (!(years > 0 && body > contribution && percent > 1)) return false;
 		if (body * (percent - 1.0) > contribution) return false;
 		if (body > maxCreditAmout) return false;

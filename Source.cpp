@@ -62,15 +62,15 @@ int main() {
 
 	cout << "\n" << ++test << ") Test static method Credit::setMaxCreditAmout(50000) " << endl;
 	Credit::setMaxCreditAmout(50000);
-	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 100000, 1.2, 21000), should be false because maxCreditAmout was exceeded " << endl;
-	cout << "    " << Credit::checkCredit(10, 100000, 1.2, 21000);
-	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 1000), should be false because the annual fee is less than a percentage " << endl;
-	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 1000);
+	cout << "\n" << ++test << ") Test static method Credit::isValidCredit(10, 100000, 1.2, 21000), should be false because maxCreditAmout was exceeded " << endl;
+	cout << "    " << Credit::isValidCredit(10, 100000, 1.2, 21000);
+	cout << "\n" << ++test << ") Test static method Credit::isValidCredit(10, 10000, 1.2, 1000), should be false because the annual fee is less than a percentage " << endl;
+	cout << "    " << Credit::isValidCredit(10, 10000, 1.2, 1000);
 	cout << "\n" << ++test << ") Test static method Credit::getRegularContribution(10, 10000, 1.2), should be 2385.23 " << endl;
 	cout << "    " << Credit::getRegularContribution(10, 10000, 1.2);
 	cout << "    " << Credit::getRegularContribution(20, 20000, 1.2);
-	cout << "\n" << ++test << ") Test static method Credit::checkCredit(10, 10000, 1.2, 2385.23), should be true " << endl;
-	cout << "    " << Credit::checkCredit(10, 10000, 1.2, 2385.23) << endl;
+	cout << "\n" << ++test << ") Test static method Credit::isValidCredit(10, 10000, 1.2, 2385.23), should be true " << endl;
+	cout << "    " << Credit::isValidCredit(10, 10000, 1.2, 2385.23) << endl;
 
 	cout << "\n" << ++test << ") Test static field Account::nextUniqueID " << endl;
 	cli.addNewAccount(20000);
@@ -94,15 +94,15 @@ int main() {
 
 	// демонстраци€ оператора ++ (префиксна€ форма) дл€ Credit
 	cout << "\n" << ++test << ") Test operator overload test ++ (prefix form) for Credit" << endl;
-	Credit first(10, 1.2, 10000, 2385.23);
-	++first;
-	cout << first << endl;
+	Credit second(10, 1.2, 10000, 2385.23);
+	++second;
+	cout << second << endl;
 
 	// демонстраци€ оператора ++ (постфиксна€ форма) дл€ Credit
 	cout << "\n" << ++test << ") Test operator overload test ++ (postfix form) for Credit" << endl;
-	Credit first(10, 1.2, 10000, 2385.23);
-	first++;
-	cout << first << endl;
+	Credit tree(10, 1.2, 10000, 2385.23);
+	tree++;
+	cout << tree << endl;
 
 	cout << "\n" << ++test << ") Test inputClientFromConsole" << endl; //12
 	Client cli_c;

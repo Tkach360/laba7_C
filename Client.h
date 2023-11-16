@@ -25,7 +25,7 @@ private:
 
 	// использование блока инициализации исключения throw
 	void checkNewCredit(int Year, double Percent, double Body, double Contrib) {
-		if (!Credit::checkCredit(Year, Body, Percent, Contrib)) {
+		if (!Credit::isValidCredit(Year, Body, Percent, Contrib)) {
 			throw "Incorrect credit details.";
 		}
 	}
