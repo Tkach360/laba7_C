@@ -9,6 +9,24 @@ protected: // использование модификатора protected
 	double percent; // в формате 1.XX..
 	double body;
 
+
+	void setYear(int newYear) {
+		this->years = newYear;
+	}
+	void setBody(double newBody) {
+		this->body = newBody;
+	}
+	void setPercent(double newPercent) {
+		this->percent = newPercent;
+	}
+
+	void setNewData(int years, double percent, double body) {
+		this->setYear(years);
+		this->setPercent(percent);
+		this->setBody(body);
+	}
+
+public:
 	BankService() {
 		this->years = -1;
 		this->percent = -1;
@@ -30,23 +48,6 @@ protected: // использование модификатора protected
 		this->body = body;
 	}
 
-	void setYear(int newYear) {
-		this->years = newYear;
-	}
-	void setBody(double newBody) {
-		this->body = newBody;
-	}
-	void setPercent(double newPercent) {
-		this->percent = newPercent;
-	}
-
-	void setNewData(int years, double percent, double body) {
-		this->setYear(years);
-		this->setPercent(percent);
-		this->setBody(body);
-	}
-
-public:
 	int getYears() {
 		return this->years;
 	}
