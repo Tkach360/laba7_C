@@ -4,7 +4,7 @@
 class BankService {
 	friend class Client;
 
-protected:
+protected: // использование модификатора protected
 	int years;
 	double percent; // в формате 1.XX..
 	double body;
@@ -51,5 +51,10 @@ public:
 		return this->body;
 	}
 
-	void showInConsole() {};
+	double getInterestAmount() {
+		double interestAmount = 0;
+		for (int i = 0; i < this->getYears(); i++)
+			interestAmount += this->getBody() * (this->getPercent() - 1);
+		return interestAmount;
+	}
 };

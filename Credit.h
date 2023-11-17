@@ -20,7 +20,6 @@ private:
 
 public:
 	Credit() : BankService() {};
-	Credit(int years) : BankService(years) {};
 	Credit(double body) : BankService(body) {};
 	Credit(int years, double percent, double body, double contrib) : BankService(years, percent, body) {
 		this->contrib = contrib;
@@ -49,6 +48,12 @@ public:
 			}
 		}
 		return FinalContributionsPayments;
+	}
+
+	// перегрузка метода базового класса BankService 
+	double getInterestAmount() {
+		double interestAmount = this->getFinalContributionsPayments() - this->getBody();
+		return interestAmount;
 	}
 
 	friend ostream& operator << (ostream& output, Credit& credit) {
