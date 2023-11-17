@@ -23,6 +23,11 @@ public:
 		return FinalDepositAmount;
 	}
 
+	double getInterestAmount() {
+		double interestAmount = this->getFinalDepositAmount() - this->getBody();
+		return interestAmount;
+	}
+
 	friend ostream& operator << (ostream& output, Deposit& deposit) {
 		string Info = "Deposit year: " + to_string(deposit.years) + " body: " + to_string(deposit.body) +
 			" percent: " + to_string(deposit.percent);

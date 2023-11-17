@@ -50,10 +50,16 @@ public:
 		return FinalContributionsPayments;
 	}
 
-	// перегрузка метода базового класса BankService 
+	// перегрузка метода базового класса без вызова метода базового класса
 	double getInterestAmount() {
 		double interestAmount = this->getFinalContributionsPayments() - this->getBody();
 		return interestAmount;
+	}
+
+	// перешрузка метода базового класса с вызовом метода базового класса
+	void setNewData(int years, double percent, double body, double contrib) {
+		BankService::setNewData(years, percent, body);
+		this->setContrib(contrib);
 	}
 
 	friend ostream& operator << (ostream& output, Credit& credit) {

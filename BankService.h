@@ -40,6 +40,12 @@ protected: // использование модификатора protected
 		this->percent = newPercent;
 	}
 
+	void setNewData(int years, double percent, double body) {
+		this->setYear(years);
+		this->setPercent(percent);
+		this->setBody(body);
+	}
+
 public:
 	int getYears() {
 		return this->years;
@@ -57,4 +63,5 @@ public:
 			interestAmount += this->getBody() * (this->getPercent() - 1);
 		return interestAmount;
 	}
+
 };
