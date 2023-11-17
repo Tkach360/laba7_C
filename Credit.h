@@ -62,6 +62,12 @@ public:
 		this->setContrib(contrib);
 	}
 
+	// переопределение виртуальной функции 
+	void applyPenalty(double penaltyPercent) {
+		cout << "A fine in the amount of " << this->getBody() * penaltyPercent << endl;
+		this->setBody(this->getBody() * (1 + penaltyPercent));
+	}
+
 	// перегрузка оператора присваивания объекту производного класса объекта базового класса
 	Credit& operator = (BankService& bs) {
 
@@ -71,6 +77,7 @@ public:
 		return *this;
 	}
 
+	// перегрузка оператора <<
 	friend ostream& operator << (ostream& output, Credit& credit) {
 		string Info = "Credit year: " + to_string(credit.years) + " body: " + to_string(credit.body) +
 			" percent: " + to_string(credit.percent) + " contribution: " + to_string(credit.contrib);

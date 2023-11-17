@@ -64,4 +64,9 @@ public:
 		return interestAmount;
 	}
 
+	// виртуальная функция начисления штрафа в виде процента от суммы задолженности
+	virtual void applyPenalty(double penaltyPercent) { // в формате 0.0...
+		cout << "A fine of BankService " << this->getBody() * penaltyPercent << endl;
+		this->setBody(this->getBody() * (1 - penaltyPercent));
+	}
 };
