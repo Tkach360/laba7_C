@@ -44,9 +44,7 @@ public:
 	double getBalance() {
 		return this->balance;
 	}
-	string getClientName() {
-		client->getName();
-	}
+	string getClientName();
 
 	void makeTransaction(Account* alterAccount, double transactionMoney) {
 		this->balance -= transactionMoney;
