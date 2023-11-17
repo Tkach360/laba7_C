@@ -180,8 +180,8 @@ public:
 	}
 
 
-	vector<Transaction> getAllTransactions() {
-		vector<Transaction> AllTransactions;
+	vector<Transaction<tm, int>> getAllTransactions() {
+		vector<Transaction<tm, int>> AllTransactions;
 		for (Account account : Accounts)
 			AllTransactions.insert(AllTransactions.end(), account.Transactions.begin(), account.Transactions.end());
 		return AllTransactions;

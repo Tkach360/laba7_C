@@ -5,14 +5,16 @@
 
 using namespace std;
 
+// шаблон класса
+template <typename T, typename V>
 class Transaction {
 	friend class Account;
 private:
 	bool sent;
 	double money;
 	string alterClientName;
-	int alterAccountID;
-	tm Time;
+	V alterAccountID;
+	T Time;
 
 	Transaction(string alterClientName, int alterAccountID, double money, bool sent) {
 		this->sent = sent;

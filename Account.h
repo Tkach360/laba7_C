@@ -18,12 +18,12 @@ private:
 	void setMoney(double newMoney) {
 		this->balance = newMoney;
 	}
-	void addNewTransaction(Transaction newTransaction) {
+	void addNewTransaction(Transaction<tm, int> newTransaction) {
 		this->Transactions.push_back(newTransaction);
 	}
 
 public:
-	vector<Transaction> Transactions;
+	vector<Transaction<tm, int>> Transactions;
 
 	Account(Client* client) {
 		this->client = client;
@@ -44,14 +44,16 @@ public:
 	double getBalance() {
 		return this->balance;
 	}
-	string getClientName();
+	string getClientName() {
+		client->getName();
+	}
 
 	void makeTransaction(Account* alterAccount, double transactionMoney) {
 		this->balance -= transactionMoney;
 		alterAccount->setMoney(alterAccount->getBalance() + transactionMoney);
 
-		Transaction NewTransactionForMyAccount(alterAccount->getClientName(), alterAccount->getID(), transactionMoney, true);
-		Transaction NewTransactionForCounterAccount(alterAccount->getClientName(), this->getID(), transactionMoney, false);
+		Transaction<tm, int> NewTransactionForMyAccount(alterAccount->getClientName(), alterAccount->getID(), transactionMoney, true);
+		Transaction<tm, int> NewTransactionForCounterAccount(alterAccount->getClientName(), this->getID(), transactionMoney, false);
 
 		this->addNewTransaction(NewTransactionForMyAccount);
 		alterAccount->addNewTransaction(NewTransactionForCounterAccount);
@@ -62,11 +64,11 @@ public:
 
 	void showAllTransactionInConsole() {
 		cout << "\nAll transaction:" << endl;
-		for (Transaction transaction : Transactions)
+		for (Transaction<tm, int> transaction : Transactions)
 			cout << transaction << endl;
 	}
 
-	vector<Transaction> getAllTransactions() {
+	vector<Transaction<tm, int>> getAllTransactions() {
 		return this->Transactions;
 	}
 };

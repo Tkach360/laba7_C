@@ -9,6 +9,7 @@ using namespace std;
 class Deposit : public BankService {
 
 public:
+	// конструкторы на основе конструктора базового класса
 	Deposit() : BankService() {};
 	Deposit(int years) : BankService(years) {};
 	Deposit(double Body) : BankService(Body) {};

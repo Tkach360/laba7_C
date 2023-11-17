@@ -19,6 +19,7 @@ private:
 
 
 public:
+	// конструкторы на основе конструктора базового класса
 	Credit() : BankService() {};
 	Credit(double body) : BankService(body) {};
 	Credit(int years, double percent, double body, double contrib) : BankService(years, percent, body) {
