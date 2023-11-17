@@ -56,10 +56,19 @@ public:
 		return interestAmount;
 	}
 
-	// перешрузка метода базового класса с вызовом метода базового класса
+	// перегрузка метода базового класса с вызовом метода базового класса
 	void setNewData(int years, double percent, double body, double contrib) {
 		BankService::setNewData(years, percent, body);
 		this->setContrib(contrib);
+	}
+
+	// перегрузка оператора присваивания объекту производного класса объекта базового класса
+	Credit& operator = (BankService& bs) {
+
+		this->setNewData(bs.getYears(), bs.getPercent(), bs.getBody(),
+			getRegularContribution(bs.getYears(), bs.getBody(), bs.getPercent()));
+		
+		return *this;
 	}
 
 	friend ostream& operator << (ostream& output, Credit& credit) {
