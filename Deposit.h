@@ -24,7 +24,7 @@ public:
 		return FinalDepositAmount;
 	}
 
-	double getInterestAmount() {
+	double getInterestAmount() override {
 		double interestAmount = this->getFinalDepositAmount() - this->getBody();
 		return interestAmount;
 	}

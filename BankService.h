@@ -1,14 +1,15 @@
 #pragma once
 #include "Client.h"
+#include "AbstractBankService.h"
 
-class BankService {
+class BankService : public AbstractBankService {
 	friend class Client;
 
 protected: // использование модификатора protected
+
 	int years;
 	double percent; // в формате 1.XX..
 	double body;
-
 
 	void setYear(int newYear) {
 		this->years = newYear;
@@ -20,11 +21,6 @@ protected: // использование модификатора protected
 		this->percent = newPercent;
 	}
 
-	void setNewData(int years, double percent, double body) {
-		this->setYear(years);
-		this->setPercent(percent);
-		this->setBody(body);
-	}
 
 public:
 	BankService() {
@@ -48,21 +44,26 @@ public:
 		this->body = body;
 	}
 
-	int getYears() {
+	int getYears() override {
 		return this->years;
 	}
-	double getPercent() {
+	double getPercent() override {
 		return this->percent;
 	}
-	double getBody() {
+	double getBody() override {
 		return this->body;
 	}
 
-	double getInterestAmount() {
+	double getInterestAmount() override {
 		double interestAmount = 0;
 		for (int i = 0; i < this->getYears(); i++)
 			interestAmount += this->getBody() * (this->getPercent() - 1);
 		return interestAmount;
+	}
+	void setNewData(int years, double percent, double body) {
+		this->setYear(years);
+		this->setPercent(percent);
+		this->setBody(body);
 	}
 
 	// виртуальная функция начисления штрафа в виде процента от суммы задолженности

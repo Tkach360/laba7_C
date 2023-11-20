@@ -52,7 +52,7 @@ public:
 	}
 
 	// перегрузка метода базового класса без вызова метода базового класса
-	double getInterestAmount() {
+	double getInterestAmount() override {
 		double interestAmount = this->getFinalContributionsPayments() - this->getBody();
 		return interestAmount;
 	}
