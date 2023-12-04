@@ -77,20 +77,6 @@ public:
 		return nullptr;
 	}
 
-	// алгоритм сортировки массива Client по возрасту
-	static void SortedByAge(vector<Client> arrClient) {
-		int size = arrClient.size();
-		for (int i = 0; i < size;i++) {
-			for (int j = i + 1; j < size - 1; j++) {
-				if (arrClient[i].getAge() > arrClient[j].getAge()) {
-					Client bufer = arrClient[i];
-					arrClient[i] = arrClient[j];
-					arrClient[j] = bufer;
-				}
-			}
-		}
-	}
-
 	void setPhoneNumber(string phoneNumber) {
 		this->phoneNumber = phoneNumber;
 	}
@@ -129,6 +115,20 @@ public:
 
 		addNewAccount(money);
 		cout << "Account created successfully" << endl;
+	}
+
+	// алгоритм сортировки массива Client по возрасту
+	void sortedAccountsByBalance() {
+		int size = Accounts.size();
+		for (int i = 0; i < size - 1; i++) {
+			for (int j = i + 1; j < size; j++) {
+				if (Accounts[i].getBalance() > Accounts[j].getBalance()) {
+					Account bufer = Accounts[i];
+					Accounts[i] = Accounts[j];
+					Accounts[j] = bufer;
+				}
+			}
+		}
 	}
 
 	// использование блоков try-catch
