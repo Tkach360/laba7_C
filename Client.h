@@ -35,6 +35,8 @@ public:
 	vector<Deposit> Deposits;
 	vector<Account> Accounts;
 
+	vector<BankService> BankServices; // контейнер с объектами BankService (может хранить производные классы Deposit и Credit)
+
 	Client() {
 		this->name = "NONE";
 		this->age = -1;
@@ -66,13 +68,27 @@ public:
 		return this->age;
 	}
 
-	// методы возврата значений через указатели
+	// алгоритм поиска
 	Account* getAccountByID(int searchID) {
 		for (int i = 0; i < Accounts.size(); i++) {
 			if (Accounts[i].getID() == searchID)
 				return &Accounts[i];
 		}
 		return nullptr;
+	}
+
+	// алгоритм сортировки массива Client по возрасту
+	static void SortedByAge(vector<Client> arrClient) {
+		int size = arrClient.size();
+		for (int i = 0; i < size;i++) {
+			for (int j = i + 1; j < size - 1; j++) {
+				if (arrClient[i].getAge() > arrClient[j].getAge()) {
+					Client bufer = arrClient[i];
+					arrClient[i] = arrClient[j];
+					arrClient[j] = bufer;
+				}
+			}
+		}
 	}
 
 	void setPhoneNumber(string phoneNumber) {

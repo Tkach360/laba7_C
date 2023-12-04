@@ -48,5 +48,4 @@ int main() {
 	cout << "\n" << ++test << ") Test virual function" << endl;
 	bs->applyPenalty(0.02);
 	cli.Credits[0].applyPenalty(0.02);
-
 }
